@@ -18,9 +18,9 @@
 		692CE6DD117A33EF00906C82 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CE6D8117A33EF00906C82 /* MainWindow.xib */; };
 		692CE6DE117A33EF00906C82 /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CE6D9117A33EF00906C82 /* OverlayView.xib */; };
 		692CE6DF117A33EF00906C82 /* SearchableListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CE6DA117A33EF00906C82 /* SearchableListView.xib */; };
-		692CE6E1117A340700906C82 /* Blue_Tie.png in Resources */ = {isa = PBXBuildFile; fileRef = 692CE6E0117A340700906C82 /* Blue_Tie.png */; };
 		6944B41611764D0A00C7E1E2 /* SearchableListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */; };
 		6944B4AA11778E0200C7E1E2 /* OverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B4A811778E0200C7E1E2 /* OverlayViewController.m */; };
+		69BF040911803B0C00757C5E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 69BF040811803B0C00757C5E /* logo.png */; };
 		69DE13081174369500809CC9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DE13061174369500809CC9 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -41,11 +41,11 @@
 		692CE6D8117A33EF00906C82 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		692CE6D9117A33EF00906C82 /* OverlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverlayView.xib; sourceTree = "<group>"; };
 		692CE6DA117A33EF00906C82 /* SearchableListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchableListView.xib; sourceTree = "<group>"; };
-		692CE6E0117A340700906C82 /* Blue_Tie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Blue_Tie.png; sourceTree = "<group>"; };
 		6944B41311764D0A00C7E1E2 /* SearchableListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchableListViewController.h; sourceTree = "<group>"; };
 		6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchableListViewController.m; sourceTree = "<group>"; };
 		6944B4A711778E0200C7E1E2 /* OverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayViewController.h; sourceTree = "<group>"; };
 		6944B4A811778E0200C7E1E2 /* OverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayViewController.m; sourceTree = "<group>"; };
+		69BF040811803B0C00757C5E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		69DE13051174369500809CC9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		69DE13061174369500809CC9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,7 +145,7 @@
 		6944B41211764C0700C7E1E2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				692CE6E0117A340700906C82 /* Blue_Tie.png */,
+				69BF040811803B0C00757C5E /* logo.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -197,7 +197,7 @@
 				692CE6DD117A33EF00906C82 /* MainWindow.xib in Resources */,
 				692CE6DE117A33EF00906C82 /* OverlayView.xib in Resources */,
 				692CE6DF117A33EF00906C82 /* SearchableListView.xib in Resources */,
-				692CE6E1117A340700906C82 /* Blue_Tie.png in Resources */,
+				69BF040911803B0C00757C5E /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
