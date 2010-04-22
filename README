@@ -1,1 +1,3 @@
 CrowdSort by J2 Labs
+
+The directories are by platform, as this is a multiplatform project. Anything platform independent is at the project level.
