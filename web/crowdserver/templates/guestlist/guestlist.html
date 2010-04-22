@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% block extratopbar %}<div id="leftnav"><a href="{% url home %}"><img alt="home" src="{{ MEDIA_URL }}images/home.png" /></a></div>{% endblock %}
+
+{% block content %}
+      <span class="graytitle">{{ initial }} names</span>
+      <ul class="pageitem">
+        {% for gid,name in id_names %}
+        <li class="menu"><a href="{% url guestlist_show_by_id gid %}"><span class="name">{{ name }}</span><span class="arrow"></span></a></li>
+        {% endfor %}
+      </ul>
+{% endblock %}

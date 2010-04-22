@@ -1,0 +1,20 @@
+If you haven't already done so, please install virtualenv and virtualenvwrapper.
+
+virtualenv - http://pypi.python.org/pypi/virtualenv
+virtualenvwrapper - pypi.python.org/pypi/virtualenvwrapper/
+
+Don't forget to set $WORKON_HOME
+
+mkvirtualenv crowdsort.dev
+
+At this point, you are already placed in your virtualenv. To enter an existing virtualenv you type 'workon virtualenvname'. If you're not sure what virtualenvs exist, you can type 'workon' on it's own for a list. Type 'deactivate' to disable the current virtual environment.
+
+cd web/crowdserver/
+pip install -I -r ./requirements.txt
+
+./manage.py syncdb
+
+./manage.py runserver --adminmedia=./adminmedia
+
+Portable devices will need an external address for access. Consider ./manage.py runserver --adminmedia=./adminmedia 192.168.1.2:8000 or something similar.
+

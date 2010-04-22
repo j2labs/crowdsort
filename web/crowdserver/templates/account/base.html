@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block rtab_id %}id="account_tab"{% endblock %}
+
+{% block subnav %}
+    {% if user.is_authenticated %}
+        <ul>
+            <li><a href="{% url acct_email %}">{% trans "E-Mail Addresses" %}</a></li>
+            {% if user.password %}
+            <li><a href="{% url acct_passwd %}">{% trans "Change Password" %}</a></li>
+            {% else %}
+            <li><a href="{% url acct_passwd_set %}">{% trans "Set Password" %}</a></li>
+            {% endif %}
+        </ul>
+    {% else %}
+        &nbsp; {# need this to give subnav some height when empty #}
+    {% endif %}
+{% endblock %}

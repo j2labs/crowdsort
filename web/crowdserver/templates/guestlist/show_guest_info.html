@@ -1,0 +1,64 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block extratopbar %}
+      <div id="leftnav"><a href="{% url home %}"><img alt="home" src="{{ MEDIA_URL }}images/home.png" /></a><!--<a href="integration.html">Integration</a>--></div>
+{% endblock %}
+
+
+{% block content %}
+
+      {% if guest %}
+
+      {% include "guestlist/guest_status.html" %}
+
+      <span class="graytitle">Status</span>
+      <form action="{% url alter_guest_status %}{{ guest.id }}" method="post">
+
+        <li class="form pageitem{% if guest.arrived %} arrived{% endif %}"><span class="check"><span class="name">Checked in</span><input name="arrived" type="checkbox" {% if guest.arrived %}checked{% endif %}/></span></li>
+        
+        {% if guest.plus_count > 1 %}
+
+		<ul class="pageitem"> 
+        
+          {% for guest_count in allowed_guest_list reversed %}
+          <li class="form">
+            <span class="choice">
+
+              {% if forloop.last %}
+              <span class="name">{{ guest.name }} is alone</span>
+              {% else %}
+              <span class="name">{{ guest_count }} guest</span>
+              {% endif %}
+              
+              <input name="new_plus_count" type="radio" value="{{ guest_count }}" {% if guest.plus_counted == guest_count %}checked{% endif %}/>
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
+
+        {% else %}
+
+        <li class="form pageitem{% if all_guests_of_guest_here %} arrived{% endif %}"><span class="check"><span class="name">With guest</span><input name="with_guest" type="checkbox" {% if all_guests_of_guest_here %}checked{% endif %}/></span></li>
+
+        {% endif %}
+		<ul class="pageitem"> 
+          <li class="form"><input name="Submit input" type="submit" value="Submit input" /></li>
+          <li class="form"><input name="Reset input" type="reset" value="reset input" /></li> 
+		</ul> 
+          
+      </form>
+
+      {% else %}
+
+      <span class="graytitle">Error</span>
+      <ul class="pageitem">
+        <li class="textbox"><p>Let the name display before hitting submit.</p></li>
+      </ul>
+
+      {% include "guestlist/name_search.html" %}
+
+      {% endif %}
+
+{% endblock %}

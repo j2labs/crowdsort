@@ -1,0 +1,8 @@
+      <span class="graytitle">{{ guest.name }}</span>
+      <ul class="pageitem">
+        <li class="textbox"><p><b>Arrived:</b> {% if not guest.arrived %}No{% else %}Yes{% endif %}</p></li>
+        <li class="textbox"><p><b>VIP:</b> {% if guest.vip %} yes{% else %} no{% endif %}</p></li>
+        <li class="textbox"><p><b>Criteria:</b> {{ guest.criteria }}</p></li>
+        <li class="textbox"><p><b>Extra guests:</b> {{ guest.plus_counted }} of {{ guest.plus_count }} have arrived</p></li>
+      </ul>
+
