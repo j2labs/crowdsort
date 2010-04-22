@@ -3,3 +3,4 @@ dev.db
 *.*~
 local_settings.py*
 .DS_Store
+iphone/CrowdSort/build
