@@ -18,7 +18,7 @@
 
         <li class="form pageitem{% if guest.arrived %} arrived{% endif %}"><span class="check"><span class="name">Checked in</span><input name="arrived" type="checkbox" {% if guest.arrived %}checked{% endif %}/></span></li>
         
-        {% if guest.plus_count > 1 %}
+        {% if guest.plus_count > 1 and guest.plus_count != guest.plus_counted %}
 
 		<ul class="pageitem"> 
         
@@ -38,9 +38,11 @@
           {% endfor %}
         </ul>
 
-        {% else %}
+        {% else %}{% if guest.plus_count == 1 and guest.plus_count != guest.plus_counted %}
 
-        <li class="form pageitem{% if all_guests_of_guest_here %} arrived{% endif %}"><span class="check"><span class="name">With guest</span><input name="with_guest" type="checkbox" {% if all_guests_of_guest_here %}checked{% endif %}/></span></li>
+        <li class="form pageitem{% if all_guests_of_guest_here %} arrived{% endif %}"><span class="check"><span class="name">Guest is here</span><input name="with_guest" type="checkbox" {% if all_guests_of_guest_here %}checked{% endif %}/></span></li>
+
+        {% endif %}
 
         {% endif %}
 		<ul class="pageitem"> 

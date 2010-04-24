@@ -11,38 +11,30 @@
 
 @implementation GuestViewController
 
-@synthesize selectedCountry;
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+@synthesize guestNameLabel;
+@synthesize tableNumberLabel;
+@synthesize emailAddressLabel;
+@synthesize phoneNumberLabel;
+@synthesize checkInButton;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	//Display the selected country.
-	lblText.text = selectedCountry;
+	// fetch the guest info here
+	
+	//Display the selected guest.
+	[guestNameLabel setText:@"This is a potentially long name"];
+	[tableNumberLabel setText:@"18"];
+	[emailAddressLabel setText:@"jd@j2labs.net"];
+	[phoneNumberLabel setText:@"212.272.3378"];
 	
 	//Set the title of the navigation bar
-	self.navigationItem.title = @"Guest status";
+	self.navigationItem.title = [guestNameLabel text];
 }
 
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -53,9 +45,24 @@
 
 
 - (void)dealloc {
-	[selectedCountry release];
-	[lblText release];
+	[guestNameLabel release];
+	[tableNumberLabel release];
+	[emailAddressLabel release];
+	[phoneNumberLabel release];
+	[checkInButton release];
     [super dealloc];
+}
+
+
+
+- (void) fetchGuestInfo {
+	
+	NSLog(@"Fetch guest info pressed");
+}
+
+- (IBAction) checkInGuest: (id) sender {
+	
+	NSLog(@"Checkin button pressed");
 }
 
 

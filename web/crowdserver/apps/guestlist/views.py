@@ -53,9 +53,9 @@ def fetch_range(request):
 #@login_required
 def landing(request, template_name="homepage.html"):
     initials = [chr(x) for x in range(ord('A'), ord('Z')+1)]
-    return render_to_response(template_name, 
-                              {'initials': initials},
-                              context_instance=RequestContext(request))
+    return render_to_response(template_name, {
+        'initials': initials
+    }, context_instance=RequestContext(request))
 
 #@login_required
 def match_first_initial(request, template_name="guestlist/guestlist.html"):
@@ -76,11 +76,12 @@ def query_names(request, template_name="guestlist/guestlist.txt"):
     names = []
     if 'q' in request.GET:
         q = request.GET['q']
-        guests = Guest.objects.order_by('name').filter(name__startswith=q)[:10]
+        # disregard limit flag and limit to 25
+        guests = Guest.objects.order_by('name').filter(name__startswith=q)[:25]
         names = [(g.name) for g in guests]
-    return render_to_response(template_name, 
-                              {'names': names},
-                              context_instance=RequestContext(request))
+    return render_to_response(template_name, { 
+        'names': names
+    }, context_instance=RequestContext(request))
 
 #@login_required
 def show_by_id(request, gid, template_name="guestlist/show_guest_info.html"):
@@ -145,16 +146,12 @@ def alter_guest_status(request, gid=None, template_name="guestlist/alter_guest_s
 
             elif found_new_plus_count:
                 npc = int(request.POST['new_plus_count'])
-                #npc = request.POST['new_plus_count']
                 net = (guest.plus_counted + npc) - guest.plus_count
                 if net < 1:
                     result = 'Success'
                 elif net > 0:
                     result = 'Failure'
                     reason = 'Guest has exceeded maximum extra guests with another line handler'
-#                else:
-#                    result = 'Failure'
-#                    reason = 'Guest was just checked in by another line handler'
 
                 if result == 'Success':
                     guest.plus_counted = guest.plus_counted + npc

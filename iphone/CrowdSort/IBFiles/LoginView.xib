@@ -39,7 +39,7 @@
 					<object class="IBUITextField" id="442416966">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 168}, {280, 31}}</string>
+						<string key="NSFrame">{{20, 76}, {280, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -65,13 +65,14 @@
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocorrectionType">1</int>
 							<int key="IBUIReturnKeyType">4</int>
+							<bool key="IBUIEnablesReturnKeyAutomatically">YES</bool>
 						</object>
 						<int key="IBUIClearButtonMode">1</int>
 					</object>
 					<object class="IBUITextField" id="980127409">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 214}, {280, 31}}</string>
+						<string key="NSFrame">{{20, 115}, {280, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -91,6 +92,7 @@
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocorrectionType">1</int>
 							<int key="IBUIReturnKeyType">4</int>
+							<bool key="IBUIEnablesReturnKeyAutomatically">YES</bool>
 							<bool key="IBUISecureTextEntry">YES</bool>
 						</object>
 						<int key="IBUIClearButtonMode">1</int>
@@ -98,7 +100,7 @@
 					<object class="IBUIButton" id="73546685">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 330}, {280, 42}}</string>
+						<string key="NSFrame">{{20, 193}, {280, 42}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -127,7 +129,7 @@
 					<object class="IBUIActivityIndicatorView" id="57498198">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{150, 302}, {20, 20}}</string>
+						<string key="NSFrame">{{150, 243}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -138,7 +140,7 @@
 					<object class="IBUITextField" id="255628954">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 263}, {280, 31}}</string>
+						<string key="NSFrame">{{20, 154}, {280, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -158,20 +160,22 @@
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIKeyboardType">3</int>
 							<int key="IBUIReturnKeyType">9</int>
+							<bool key="IBUIEnablesReturnKeyAutomatically">YES</bool>
 						</object>
 						<int key="IBUIClearButtonMode">1</int>
 					</object>
-					<object class="IBUIImageView" id="499010095">
+					<object class="IBUIImageView" id="461217327">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{76, 11}, {158, 142}}</string>
+						<string key="NSFrame">{{75, 0}, {151, 63}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<int key="IBUIContentMode">11</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">logo.png</string>
+							<string key="NSResourceName">crowdsortlogo.png</string>
 						</object>
 					</object>
 				</object>
@@ -179,7 +183,7 @@
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC45Mjg1NzE0IDAuOTI4NTcxNCAwLjkyODU3MTQAA</bytes>
+					<bytes key="NSRGB">MC45MjU0OTAyIDAuOTI1NDkwMiAwLjkyNTQ5MDIAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 			</object>
@@ -261,12 +265,12 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="73546685"/>
 							<reference ref="57498198"/>
+							<reference ref="73546685"/>
 							<reference ref="255628954"/>
 							<reference ref="980127409"/>
 							<reference ref="442416966"/>
-							<reference ref="499010095"/>
+							<reference ref="461217327"/>
 						</object>
 						<reference key="parent" ref="144137994"/>
 					</object>
@@ -308,7 +312,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">19</int>
-						<reference key="object" ref="499010095"/>
+						<reference key="object" ref="461217327"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -332,7 +336,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>LoginViewController</string>
 					<string>UIResponder</string>
-					<string>{{464, 522}, {320, 480}}</string>
+					<string>{{382, 493}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

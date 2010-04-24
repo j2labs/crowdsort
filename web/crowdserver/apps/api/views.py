@@ -39,9 +39,9 @@ def names(request):
     result = []
     if 'q' in request.GET:
         name = request.GET['q']
-        guests = Guest.objects.filter(name__istartswith=name)
+        guests = Guest.objects.filter(name__istartswith=name).order_by('name')
     else:
-        guests = Guest.objects.all()
+        guests = Guest.objects.all().order_by('name')
     
     if 'limit' in request.GET:
         guests = guests[:int(request.GET['limit'])]

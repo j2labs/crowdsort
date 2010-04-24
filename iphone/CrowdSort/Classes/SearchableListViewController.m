@@ -97,6 +97,31 @@
 #pragma mark -
 #pragma mark Table view methods
 
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+	/*if(searching)
+		return nil;
+	
+	NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+	[tempArray addObject:@"N"];
+	[tempArray addObject:@"Y"];
+	[tempArray addObject:@"N"];
+	[tempArray addObject:@"Y"];
+	[tempArray addObject:@"N"];
+	[tempArray addObject:@"Y"];
+	[tempArray addObject:@"N"];
+	[tempArray addObject:@"Y"];
+	return tempArray;*/
+	return nil;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+	/*if(searching)
+		return -1;
+	
+	return index % 2;*/
+	return -1;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	if(searching)
 		return 1;
@@ -158,20 +183,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	//Get the selected country
 	
-	NSString *selectedCountry = nil;
+	NSString *guestName = nil;
 	
 	if(searching)
-		selectedCountry = [copyListOfItems objectAtIndex:indexPath.row];
+		guestName = [copyListOfItems objectAtIndex:indexPath.row];
 	else {
 		
 		NSDictionary *dictionary = [listOfItems objectAtIndex:indexPath.section];
 		NSArray *array = [dictionary objectForKey:[self keyForSection:indexPath.section]];
-		selectedCountry = [array objectAtIndex:indexPath.row];
+		guestName = [array objectAtIndex:indexPath.row];
 	}
 	
 	//Initialize the detail view controller and display it.
 	GuestViewController *gvController = [[GuestViewController alloc] initWithNibName:@"GuestView" bundle:[NSBundle mainBundle]];
-	gvController.selectedCountry = selectedCountry;
+	[[gvController guestNameLabel] setText:guestName];
 	[self.navigationController pushViewController:gvController animated:YES];
 	[gvController release];
 	gvController = nil;

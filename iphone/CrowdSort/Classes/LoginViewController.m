@@ -30,6 +30,11 @@
 
 
 - (void)dealloc {
+	[usernameField release];
+	[passwordField release];
+	[serverAddrField release];
+	[loginButton release];
+	[loginIndicator release];
     [super dealloc];
 }
 

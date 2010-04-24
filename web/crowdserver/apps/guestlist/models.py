@@ -8,23 +8,23 @@ class Household(models.Model):
     name = models.CharField(_('Name'), max_length=255)
 
     def __unicode__(self):
-        return "%s" % (self.name,)
+        return u'%s' % (self.name,)
 
 class Guest(models.Model):
-    name = models.CharField(_('Name'), max_length=255)
-    vip = models.BooleanField(_('VIP'), default=False)
-    criteria = models.CharField(_('Criteria'), max_length=1024)
-    event_date = models.DateField(_('Event Date'))
+    name = models.CharField(_('Name'), max_length=255, default=u'Unknown')
+    table_name = models.CharField(_('Table Name'), max_length=100, blank=True, null=True)
+    email = models.EmailField(_('Email Address'), max_length=255, blank=True, null=True)
+    comments = models.CharField(_('Comments'), max_length=1024, blank=True, null=True)
     arrived = models.BooleanField(_('Arrived'), default=False)
-    plus_count = models.IntegerField(_('Additional guests'))
-    plus_counted = models.IntegerField(_('Guests counted'))
-    household = models.ForeignKey(Household)
-    
+    plus_count = models.IntegerField(_('Additional guests'), default=0)
+    plus_counted = models.IntegerField(_('Guests counted'), default=0)
+    household = models.ForeignKey(Household, blank=True, null=True)
+
     def __unicode__(self):
-        return "%s :: %s" % (self.name, self.event_date)
+        return u'%s' % (self.name)
     
     class Meta:
-        ordering = ('-event_date',)
+        ordering = ('-name',)
     
     def get_absolute_url(self):
         return ('show/', [str(self.id)])

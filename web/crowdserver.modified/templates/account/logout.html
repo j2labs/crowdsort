@@ -1,0 +1,16 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Logout" %}{% endblock %}
+
+{% block content %}
+
+	  <span class="graytitle">Logged out</span>
+	  <ul class="pageitem">
+		<li class="textbox"><p>You've been logged out</p></li>
+	  </ul>
+
+      {% include "account/userpass_login.html" %}
+
+{% endblock %}

@@ -10,12 +10,21 @@
 
 
 @interface GuestViewController : UIViewController {
-	
-	IBOutlet UILabel *lblText;
-	NSString *selectedCountry;
-	
+	IBOutlet UILabel *guestNameLabel;
+	IBOutlet UILabel *tableNumberLabel;
+	IBOutlet UILabel *emailAddressLabel;
+	IBOutlet UILabel *phoneNumberLabel;
+	IBOutlet UIButton *checkInButton;
 }
 
-@property (nonatomic, retain) NSString *selectedCountry;
+
+@property (nonatomic, retain) UILabel *guestNameLabel;
+@property (nonatomic, retain) UILabel *tableNumberLabel;
+@property (nonatomic, retain) UILabel *emailAddressLabel;
+@property (nonatomic, retain) UILabel *phoneNumberLabel;
+@property (nonatomic, retain) UIButton *checkInButton;
+
+- (void) fetchGuestInfo;
+- (IBAction) checkInGuest: (id) sender;
 
 @end

@@ -1,0 +1,39 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block extratopbar %}
+      <div id="leftnav"><a href="{% url home %}"><img alt="home" src="{{ MEDIA_URL }}images/home.png" /></a><!--<a href="integration.html">Integration</a>--></div>
+{% endblock %}
+
+
+{% block content %}
+
+      {% if guest %}
+
+      {% include "guestlist/guest_status.html" %}
+
+      <span class="graytitle">Status</span>
+      <form action="{% url alter_guest_status %}{{ guest.id }}" method="post">
+
+        <li class="form pageitem{% if guest.arrived %} arrived{% endif %}"><span class="check"><span class="name">Checked in</span><input name="arrived" type="checkbox" {% if guest.arrived %}checked{% endif %}/></span></li>
+        
+		<ul class="pageitem"> 
+          <li class="form"><input name="Submit input" type="submit" value="Submit input" /></li>
+          <li class="form"><input name="Reset input" type="reset" value="reset input" /></li> 
+		</ul> 
+          
+      </form>
+
+      {% else %}
+
+      <span class="graytitle">Error</span>
+      <ul class="pageitem">
+        <li class="textbox"><p>Let the name display before hitting submit.</p></li>
+      </ul>
+
+      {% include "guestlist/name_search.html" %}
+
+      {% endif %}
+
+{% endblock %}

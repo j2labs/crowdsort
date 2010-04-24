@@ -1,0 +1,15 @@
+{% block content %}
+	  <span class="graytitle">Login to the CrowdSort Manager</span>
+      <form class="login" method="POST" action="{% url acct_login %}">
+        {% csrf_token %}
+	    <ul class="pageitem">
+          <li class="form"><input id="id_username" placeholder="Username" type="text" name="username" maxlength="30"/></li>
+          {% if form.username.errors %}<li class="form">{{ form.username.errors|escape }}</li>{% endif %}
+		  <li class="form"><input id="id_password" placeholder="Password" type="password" name="password"/></li>
+          {% if form.password.errors %}<li class="form">{{ form.password.errors|escape }}</li>{% endif %}
+		  <li class="form"><input name="Submit input" type="submit" value="Login" /></li>
+		  <li class="form"><input name="Reset" type="reset" value="Clear" /></li>
+          <!--<li class="form"><a href="{% url acct_passwd_reset %}">Forgot password?</a></li>-->
+	    </ul>
+      </form>
+{% endblock %}

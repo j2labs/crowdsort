@@ -20,7 +20,10 @@
 		692CE6DF117A33EF00906C82 /* SearchableListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CE6DA117A33EF00906C82 /* SearchableListView.xib */; };
 		6944B41611764D0A00C7E1E2 /* SearchableListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */; };
 		6944B4AA11778E0200C7E1E2 /* OverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B4A811778E0200C7E1E2 /* OverlayViewController.m */; };
-		69BF040911803B0C00757C5E /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 69BF040811803B0C00757C5E /* logo.png */; };
+		69BF0411118040B400757C5E /* crowdsortlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 69BF0410118040B400757C5E /* crowdsortlogo.png */; };
+		69BF041B118047D700757C5E /* ControlPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69BF041A118047D700757C5E /* ControlPanelViewController.m */; };
+		69BF041D118047EA00757C5E /* ControlPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69BF041C118047EA00757C5E /* ControlPanelView.xib */; };
+		69BF042C11804C9100757C5E /* cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 69BF042B11804C9100757C5E /* cs.png */; };
 		69DE13081174369500809CC9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69DE13061174369500809CC9 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +48,11 @@
 		6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchableListViewController.m; sourceTree = "<group>"; };
 		6944B4A711778E0200C7E1E2 /* OverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayViewController.h; sourceTree = "<group>"; };
 		6944B4A811778E0200C7E1E2 /* OverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayViewController.m; sourceTree = "<group>"; };
-		69BF040811803B0C00757C5E /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		69BF0410118040B400757C5E /* crowdsortlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crowdsortlogo.png; sourceTree = "<group>"; };
+		69BF0419118047D700757C5E /* ControlPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPanelViewController.h; sourceTree = "<group>"; };
+		69BF041A118047D700757C5E /* ControlPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPanelViewController.m; sourceTree = "<group>"; };
+		69BF041C118047EA00757C5E /* ControlPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlPanelView.xib; sourceTree = "<group>"; };
+		69BF042B11804C9100757C5E /* cs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cs.png; sourceTree = "<group>"; };
 		69DE13051174369500809CC9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		69DE13061174369500809CC9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +84,8 @@
 				69120F67117804E20014C8FA /* GuestViewController.m */,
 				6944B4A711778E0200C7E1E2 /* OverlayViewController.h */,
 				6944B4A811778E0200C7E1E2 /* OverlayViewController.m */,
+				69BF0419118047D700757C5E /* ControlPanelViewController.h */,
+				69BF041A118047D700757C5E /* ControlPanelViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -138,6 +147,7 @@
 				692CE6D8117A33EF00906C82 /* MainWindow.xib */,
 				692CE6D9117A33EF00906C82 /* OverlayView.xib */,
 				692CE6DA117A33EF00906C82 /* SearchableListView.xib */,
+				69BF041C118047EA00757C5E /* ControlPanelView.xib */,
 			);
 			path = IBFiles;
 			sourceTree = "<group>";
@@ -145,7 +155,8 @@
 		6944B41211764C0700C7E1E2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				69BF040811803B0C00757C5E /* logo.png */,
+				69BF042B11804C9100757C5E /* cs.png */,
+				69BF0410118040B400757C5E /* crowdsortlogo.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -197,7 +208,9 @@
 				692CE6DD117A33EF00906C82 /* MainWindow.xib in Resources */,
 				692CE6DE117A33EF00906C82 /* OverlayView.xib in Resources */,
 				692CE6DF117A33EF00906C82 /* SearchableListView.xib in Resources */,
-				69BF040911803B0C00757C5E /* logo.png in Resources */,
+				69BF0411118040B400757C5E /* crowdsortlogo.png in Resources */,
+				69BF041D118047EA00757C5E /* ControlPanelView.xib in Resources */,
+				69BF042C11804C9100757C5E /* cs.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +227,7 @@
 				6944B41611764D0A00C7E1E2 /* SearchableListViewController.m in Sources */,
 				6944B4AA11778E0200C7E1E2 /* OverlayViewController.m in Sources */,
 				69120F69117804E20014C8FA /* GuestViewController.m in Sources */,
+				69BF041B118047D700757C5E /* ControlPanelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
