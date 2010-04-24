@@ -7,6 +7,7 @@
 //
 
 #import "GuestViewController.h"
+#import "JSON.h"
 
 
 @implementation GuestViewController
