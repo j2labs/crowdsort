@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('guestlist.views',
+
     url(r'^$', 'query_names', name="guestlist_query_names"),
     url(r'^show/(?P<gid>\d+)$', 'show_by_id', name="guestlist_show_by_id"),
     url(r'^show/$', 'show_by_name', name="guestlist_show_by_name"),

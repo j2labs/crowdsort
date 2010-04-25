@@ -20,6 +20,9 @@ a {
 a:hover span.arrow {
 	background-position:0 -13px!important
 }
+.error {
+    color: red;
+}
 #topbar {
 	position:relative;
 	left:0;

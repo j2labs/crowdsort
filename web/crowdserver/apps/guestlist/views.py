@@ -1,8 +1,10 @@
 from django.template import Context, loader, RequestContext
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.db import connection, transaction
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 from models import Guest
 
@@ -50,14 +52,40 @@ def fetch_range(request):
 # iWebKit based views #
 #######################
 
-#@login_required
+def login_user(request, template_name="login.html"):
+
+    message = None
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                # TODO: Implement 'next' handling for nice link-through
+                return HttpResponseRedirect('/')
+            else:
+                message = 'This account has been disabled.'
+        else:
+            message = 'Incorrect username or password.'
+    
+    return render_to_response(template_name, {'message':message}, 
+        context_instance=RequestContext(request))
+
+@login_required
+def logout_user(request):
+
+    logout(request)
+    return HttpResponseRedirect('/')
+
+@login_required
 def landing(request, template_name="homepage.html"):
     initials = [chr(x) for x in range(ord('A'), ord('Z')+1)]
     return render_to_response(template_name, {
         'initials': initials
     }, context_instance=RequestContext(request))
 
-#@login_required
+@login_required
 def match_first_initial(request, template_name="guestlist/guestlist.html"):
     id_names = []
     initial = None
@@ -70,7 +98,7 @@ def match_first_initial(request, template_name="guestlist/guestlist.html"):
         'initial': initial
     }, context_instance=RequestContext(request))
 
-#@login_required
+@login_required
 def query_names(request, template_name="guestlist/guestlist.txt"):
     # receives ?q=a&limit=150&timestamp=1265604168244
     names = []
@@ -83,7 +111,7 @@ def query_names(request, template_name="guestlist/guestlist.txt"):
         'names': names
     }, context_instance=RequestContext(request))
 
-#@login_required
+@login_required
 def show_by_id(request, gid, template_name="guestlist/show_guest_info.html"):
     guest_set = Guest.objects.filter(id=gid)
     if len(guest_set) > 0:
@@ -96,7 +124,7 @@ def show_by_id(request, gid, template_name="guestlist/show_guest_info.html"):
         'all_guests_of_guest_here': (allowed_guests == 0),
     }, context_instance=RequestContext(request))
 
-#@login_required
+@login_required
 def show_by_name(request, template_name="guestlist/show_guest_info.html"):
     guest = None
     allowed_guest_list = None
@@ -115,7 +143,7 @@ def show_by_name(request, template_name="guestlist/show_guest_info.html"):
     }, context_instance=RequestContext(request))
         
 
-#@login_required
+@login_required
 def alter_guest_status(request, gid=None, template_name="guestlist/alter_guest_status.html"):
     context_vars = {}
     result = None

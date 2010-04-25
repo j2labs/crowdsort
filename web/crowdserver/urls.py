@@ -8,6 +8,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^$', 'guestlist.views.landing', name='home'),
+    url(r'^accounts/login/$', 'guestlist.views.login_user', name='login'),
+    url(r'^logout/$', 'guestlist.views.logout_user', name='logout'),
     (r'^names/', include('guestlist.urls')),
     (r'^api/', include('api.urls')),                       
 
