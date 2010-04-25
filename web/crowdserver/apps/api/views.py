@@ -1,6 +1,6 @@
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.core import serializers
 
 from guestlist.models import Guest
@@ -20,11 +20,49 @@ def login(request):
 def detail(request, guest_id):
     """
     Returns the Guest record specified by guest_id in json.
+    If request method is POST, this is an update and we'll delegate to update_guest()
     """
+    if request.method == 'POST':
+        return update_guest(request, guest_id)
     
     guest = Guest.objects.get(id=guest_id)
     json_serializer = serializers.get_serializer("json")()
     return HttpResponse(json_serializer.serialize((guest,), ensure_ascii=False))
+
+def update_guest(request, guest_id):
+    """
+    Updates the guest status (arrived), table name, and guest-guests counted.
+    This api ought to be called w/ POST and params:
+     arrived : t for True, f for False
+     table: [the name of the table/host]
+     plus: [the number of plus_guests who have arrived]
+    """
+    if request.method != 'POST':
+        return HttpResponseBadRequest('Guest update method requires POST')
+    
+    guest = Guest.objects.get(id=guest_id)
+    if guest == None:
+        return HttpResponseBadRequest('Guest with id %s does not exist' % (guest_id,))
+    
+    if 'arrived' in request.POST:
+        arrived = request.POST['arrived']
+        if arrived == 't':
+            guest.arrived = True
+        elif arrived == 'f':
+            guest.arrived = False
+        else:
+            return HttpResponseBadRequest('Value "%s" for arrived is unknown. Must be "t" or "f"' % (arrived,))
+    
+    if 'table' in request.POST:
+        guest.table_name = request.POST['table']
+    
+    if 'plus' in request.POST:
+        print "plus value = %s" % (request.POST['plus'])
+        guest.plus_counted = int(request.POST['plus'])
+        print "after -- %s" % (guest.plus_counted)
+    
+    guest.save()
+    return HttpResponse("Guest updated successfully")
 
 
 @logged_in_or_basicauth()
