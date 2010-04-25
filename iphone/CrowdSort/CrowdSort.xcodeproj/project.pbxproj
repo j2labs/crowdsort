@@ -72,6 +72,7 @@
 		69BF041A118047D700757C5E /* ControlPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPanelViewController.m; sourceTree = "<group>"; };
 		69BF041C118047EA00757C5E /* ControlPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlPanelView.xib; sourceTree = "<group>"; };
 		69BF042B11804C9100757C5E /* cs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cs.png; sourceTree = "<group>"; };
+		69D1421F1183FE4300C05D26 /* AppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConstants.h; sourceTree = "<group>"; };
 		69DE13051174369500809CC9 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		69DE13061174369500809CC9 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +134,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				69D1421F1183FE4300C05D26 /* AppConstants.h */,
 				692CE68D117A313600906C82 /* CrowdSort_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);

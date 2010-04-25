@@ -10,6 +10,8 @@
 
 
 @interface GuestViewController : UIViewController {
+
+	NSString *guestId;
 	IBOutlet UILabel *guestNameLabel;
 	IBOutlet UILabel *tableNumberLabel;
 	IBOutlet UILabel *emailAddressLabel;
@@ -18,6 +20,7 @@
 }
 
 
+@property (nonatomic, retain) NSString *guestId;
 @property (nonatomic, retain) UILabel *guestNameLabel;
 @property (nonatomic, retain) UILabel *tableNumberLabel;
 @property (nonatomic, retain) UILabel *emailAddressLabel;

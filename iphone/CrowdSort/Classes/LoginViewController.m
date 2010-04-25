@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "AppConstants.h"
 
 @implementation LoginViewController
 
@@ -62,6 +63,11 @@
 	if(authenticated) {
 		// yay
 		NSLog(@"Authenticated: YES");
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		[defaults setObject:username forKey:kUsername];
+		[defaults setObject:password forKey:kPassword];
+		[defaults setObject:serverAddr forKey:kServerAddress];
+		[defaults synchronize];
 		[self dismissModalViewControllerAnimated:YES];
 	}
 	else {
@@ -73,6 +79,7 @@
 											  cancelButtonTitle:@"Cancel" 
 											  otherButtonTitles:@"OK", nil];
 		[alert show];
+		[alert release];
 		loginIndicator.hidden = TRUE;
 		[loginIndicator stopAnimating];
 		loginButton.enabled = TRUE;
