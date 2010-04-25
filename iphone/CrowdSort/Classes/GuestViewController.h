@@ -27,7 +27,7 @@
 @property (nonatomic, retain) UILabel *phoneNumberLabel;
 @property (nonatomic, retain) UIButton *checkInButton;
 
-- (void) fetchGuestInfo;
+- (NSDictionary*) fetchGuestInfo;
 - (IBAction) checkInGuest: (id) sender;
 
 @end

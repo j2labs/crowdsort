@@ -6,6 +6,7 @@
 //  Copyright 2010 J2 Labs LLC. All rights reserved.
 //
 
+#import "CrowdSortAppDelegate.h"
 #import "GuestViewController.h"
 #import "JSON.h"
 #import "AppConstants.h"
@@ -25,17 +26,21 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	guestId = @"1";
+	guestId = @"2";
 	
 	// fetch the guest info here
-	[self fetchGuestInfo];
-	NSLog(@"fetching guest data");
+	NSDictionary *guestInfo = [self fetchGuestInfo];
+	
+	NSString *name = [guestInfo objectForKey:@"name"];
+	NSString *table = [guestInfo objectForKey:@"table_name"];
+	NSString *email = [guestInfo objectForKey:@"email"];
+	NSString *phone = [guestInfo objectForKey:@"phone_number"];
 	
 	//Display the selected guest.
-	[guestNameLabel setText:@"This is a potentially long name"];
-	[tableNumberLabel setText:@"18"];
-	[emailAddressLabel setText:@"jd@j2labs.net"];
-	[phoneNumberLabel setText:@"212.272.3378"];
+	[guestNameLabel setText:name];
+	[tableNumberLabel setText:table];
+	[emailAddressLabel setText:email];
+	[phoneNumberLabel setText:phone];
 	
 	//Set the title of the navigation bar
 	self.navigationItem.title = [guestNameLabel text];
@@ -61,89 +66,15 @@
 }
 
 
-- (void) runQuery:(NSString*) queryUrl {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	//NSString *credentials = [defaults stringForKey:kCredentials];
-	NSString *serverAddr = [defaults stringForKey:kServerAddress];
-	NSString *urlString = [NSString stringWithFormat:@"http://%@%@", serverAddr, queryUrl];
-	NSLog(urlString);
-	
-	NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]
-												cachePolicy:NSURLRequestUseProtocolCachePolicy
-											timeoutInterval:30.0];
-		
-	// create the connection with the request
-	// and start loading the data
-	[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-	
-}	
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	NSLog(@"connection:didReceiveAuthenticationChallenge:");
-	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSString *username = [defaults stringForKey:kUsername];
-	NSString *password = [defaults stringForKey:kPassword];
-			
-	NSURLProtectionSpace *protectionSpace = [challenge protectionSpace];
-	NSLog(@"connection:didReceiveAuthenticationChallenge: protectionSpace: authenticationMethod = %@, host = %@, port = %d, protocol = %@, isProxy = %d, proxyType = %@, realm = %@, receivesCredentialSecurely = %d", [protectionSpace authenticationMethod], [protectionSpace host], [protectionSpace port], [protectionSpace protocol], [protectionSpace isProxy], [protectionSpace proxyType], [protectionSpace realm], [protectionSpace receivesCredentialSecurely]);
-		
-	NSURLCredential *urlCredential = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceForSession];
-	[[challenge sender] useCredential:urlCredential forAuthenticationChallenge:challenge];
-
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"connection:didReceiveResponse:");
-	
-	if ([response respondsToSelector:@selector(statusCode)]) {
-		int statusCode = [(NSHTTPURLResponse *)response statusCode];
-		// ignore anything that doesn't come back as 200 (OK) -- mainly a 304 (Not Modified) or 400 (Bad Request = Rate limit exceeded)
-		NSLog(@"IFTwitterConnection: connection:didReceiveResponse: statusCode = %d", statusCode);
-		
-		//statusCode = 400;
-		
-		if (statusCode == 200) {
-			NSLog(@"IFTwitterConnection: connection:didReceiveResponse: response MIMEType = %@", [response MIMEType]);
-			
-			//if (! [[response MIMEType] isEqualToString:@"application/xml"]) {
-			//	[self _setErrorType:@"FailedRetrievalInvalidMIMEType"];	
-			//}
-			//else {
-			NSLog(@"MIMEType: %@", [response MIMEType]);
-			//}
-		}
-		else {
-			NSDictionary *userInfo = [NSDictionary
-									  dictionaryWithObject:[NSString stringWithFormat:@"HTTP %d response", statusCode]
-													forKey:NSLocalizedDescriptionKey];
-			[NSError errorWithDomain:@"HTTPErrorDomain" code:statusCode userInfo:userInfo];
-			
-		}
-	}
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-	NSLog(@"connection:didReceiveData: data = %@", [NSString stringWithUTF8String:[data bytes]]);
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	NSLog(@"connection:didFailWithError:");
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	NSLog(@"connectionDidFinishLoading");
-}
-
-
-- (void)fetchGuestInfo {
+- (NSDictionary*)fetchGuestInfo {
 	NSString *url = [NSString stringWithFormat:@"%@%@/", kURLGuests, guestId];
-	return [self runQuery:url];
+	return [CrowdSortAppDelegate runSynchronousQuery:url];
 }
+
 
 - (IBAction)checkInGuest: (id) sender {
 	NSString *url = [NSString stringWithFormat:@"%@%@/", kURLCheckin, guestId];
-	[self runQuery:url];
+	[CrowdSortAppDelegate runSynchronousQuery:url];
 }
 
 
