@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block extratopbar %}
+{% endblock %}
+
+{% block content %}
+
+<span class="graytitle">Search</span>
+  <form class="login" id="login" method="POST" action="{% url login %}">
+  <ul class="pageitem">
+  {% if message %}
+    <h3 class="error">{{ message }}</h3>
+  {% endif %}
+  <li class="form"><input name="username" id="username" placeholder="Login Name" type="text" /></li>
+  <li class="form"><input name="password" id="password" placeholder="Password" type="password" /></li>
+  <li class="form"><input name="Login" id="submit" type="submit" value="Login" /></li>
+  </ul>
+  </form>
+
+{% endblock %}
