@@ -11,6 +11,7 @@ class Guest(models.Model):
     table_name = models.CharField(_('Table Name'), max_length=100, blank=True, null=True)
     email = models.EmailField(_('Email Address'), max_length=255, blank=True, null=True)
     comments = models.CharField(_('Comments'), max_length=1024, blank=True, null=True)
+    phone_number = models.CharField(_('Phone Number'), max_length=13, blank=True, null=True)
     arrived = models.BooleanField(_('Arrived'), default=False)
     plus_count = models.IntegerField(_('Additional guests'), default=0)
     plus_counted = models.IntegerField(_('Guests counted'), default=0)

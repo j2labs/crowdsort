@@ -29,8 +29,6 @@ def makedata(request, how_many):
         guest.name = name
         guest.table_name = "Table"
         email = "ih@ve.one"
-        guest.plus_count = 0
-        guest.plus_counted = 0
         guest.save()
     
     print "Guest created."
