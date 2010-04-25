@@ -1,6 +1,8 @@
 {% extends "site_base.html" %}
 
-{% block extratopbar %}<div id="leftnav"><a href="{% url home %}"><img alt="home" src="{{ MEDIA_URL }}images/home.png" /></a></div>{% endblock %}
+{% block extratopbar %}
+<div id="leftnav"><a href="{% url home %}"><img alt="home" src="{{ MEDIA_URL }}images/home.png" /></a></div>
+{% endblock %}
 
 {% block content %}
       <span class="graytitle">{{ initial }} names</span>
