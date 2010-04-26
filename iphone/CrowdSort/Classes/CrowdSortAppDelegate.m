@@ -64,12 +64,15 @@
 	// parse the JSON response into an object
 	// Here we're using NSArray since we're parsing an array of JSON status objects
 	NSArray *data = [parser objectWithString:jsonString error:nil];
-	NSDictionary *datum = [data objectAtIndex:0];
-	NSLog(@"Datum: %@", datum);
-	NSDictionary *fields = [datum objectForKey:@"fields"];
+	
+	// Json strings from Django look like this:
+	// [{"pk": 1, "model": "guestlist.guest", "fields": {"phone_number": "1231231234", "name": "Dennis, James"}}]
+	NSDictionary *datum = [data objectAtIndex:0]; // {"pk": 1, "model": "guestlist.guest", "fields": {"phone_number": "1231231234", "name": "Dennis, James"}}
+	NSDictionary *fields = [datum objectForKey:@"fields"]; // {"phone_number": "1231231234", "name": "Dennis, James"}
 	
 	NSLog(@"End of runSynchronousQuery:response:error:");
 	
+	//return datum;
 	return fields;
 }
 

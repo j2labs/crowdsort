@@ -77,7 +77,7 @@
 }
 
 
-- (BOOL)checkLoginOnServer:(NSString *)serverAddr withUsername:(NSString *)username withPassword:(NSString *)password {
+- (BOOL) checkLoginOnServer:(NSString *)serverAddr withUsername:(NSString *)username withPassword:(NSString *)password {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:username forKey:kUsername];
 	[defaults setObject:password forKey:kPassword];
@@ -87,7 +87,10 @@
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:kURLLogin response:&response error:&error];
-	NSLog(@"error: %@", error);
+	
+	//NSLog(@"Fields returned: %@", fields);
+	
+	NSLog(@"error: %@", [error localizedDescription]);
 	if(error) {
 		NSString *errorMsg = [NSString stringWithFormat:@"Error: %@", [error localizedDescription]];
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -115,9 +118,11 @@
 	
 	NSLog(@"checkLoginOnServer:withUsername:withPassword: %@", fields);
 	if(fields) {
+		NSLog(@"YES. Found fields in return value: %@", fields);
 		return YES;
 	}
 	else {
+		NSLog(@"NO. Did not find fields.");
 		return NO;
 	}
 }

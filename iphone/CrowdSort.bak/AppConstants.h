@@ -8,6 +8,3 @@
 #define kURLGuests @"/api/guests/"
 #define kURLNames @"/api/names/"
 #define kURLCheckin @"/api/checkin/"
-
-// Table keys
-#define kUninitialized @"Uninitialized"

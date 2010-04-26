@@ -10,19 +10,8 @@
 #import "SearchableListViewController.h"
 #import "OverlayViewController.h"
 #import "GuestViewController.h"
-#import "AppConstants.h"
 
 @implementation SearchableListViewController
-
-
-- (NSDictionary *)initializeGuestList {
-	NSString *url = [NSString stringWithFormat:kURLNames];
-	NSURLResponse *response = nil;
-	NSError *error = nil;
-	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
-	return fields;
-}
-
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -30,30 +19,25 @@
 	//Initialize the array.
 	listOfItems = [[NSMutableArray alloc] init];
 	
-	NSArray *defaultList = [NSArray arrayWithObjects:@"J2 Labs", nil];
-	NSDictionary *defaultDict = [NSDictionary dictionaryWithObject:defaultList forKey:kUninitialized];
+	NSArray *notCheckedInArray = [NSArray arrayWithObjects:@"Dennis, James", @"Gallogly, Ruth", @"Harris, Kingsley", @"Huang, Christine", @"Merlino, John", @"Tripp, Peter", @"Yonosko, Holly", nil];
+	NSDictionary *notCheckedInDict = [NSDictionary dictionaryWithObject:notCheckedInArray forKey:@"Not checked in"];
 	
-	//NSDictionary *results = [self initializeGuestList];
-	//NSLog(@"Results: %@", results);
-	NSLog(@"Got here 1");
-	[listOfItems addObject:defaultDict];
+	NSArray *checkedInArray = [NSArray arrayWithObjects:@"Darabi, Soraya", @"Greenwood, Steve", nil];
+	NSDictionary *checkedInDict = [NSDictionary dictionaryWithObject:checkedInArray forKey:@"Checked in"];
 	
-	NSLog(@"Got here 2");
+	[listOfItems addObject:notCheckedInDict];
+	[listOfItems addObject:checkedInDict];
+	
 	//Initialize the copy array.
 	copyListOfItems = [[NSMutableArray alloc] init];
 	
-	NSLog(@"Got here 3");
 	//Set the title
 	self.navigationItem.title = @"CrowdSort";
 	
 	//Add the search bar
-	NSLog(@"Got here 3.1");
 	self.tableView.tableHeaderView = searchBar;
-	NSLog(@"Got here 3.2");
 	searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	
-	
-	NSLog(@"Got here 4");
 	searching = NO;
 	letUserSelectRow = YES;
 }
@@ -96,24 +80,18 @@
 }
 
 - (NSArray *) sectionGroups {
-	//if(!initialized) {
-		return [NSArray arrayWithObjects:kUninitialized];
-	/*}
-	else {
-		return [NSArray arrayWithObjects:@"Not checked in", @"Checked in",  nil];
-	}*/
+	return [NSArray arrayWithObjects:@"Not checked in", @"Checked in",  nil];
 }
 
 
 - (NSString *)keyForSection:(NSInteger)section {
-	/*
 	NSArray *sections = [self sectionGroups];
-	if([sections count] >= section) {
-		return [sections objectAtIndex:section];
+	if(section == 0) {
+		return [sections objectAtIndex:0];
 	}
-	*/
-	
-	return kUninitialized;
+	else {
+		return [sections objectAtIndex:1];
+	}
 }
 
 #pragma mark -
@@ -203,6 +181,8 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	//Get the selected country
+	
 	NSString *guestName = nil;
 	
 	if(searching)
@@ -232,6 +212,7 @@
 
 
 - (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
+	
 	//return UITableViewCellAccessoryDetailDisclosureButton;
 	return UITableViewCellAccessoryDisclosureIndicator;
 }

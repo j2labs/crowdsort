@@ -10,18 +10,16 @@
 
 @class OverlayViewController;
 
+
 @interface SearchableListViewController : UITableViewController {
 	NSMutableArray *listOfItems;
 	NSMutableArray *copyListOfItems;
 	IBOutlet UISearchBar *searchBar;
-	BOOL initialized;
 	BOOL searching;
 	BOOL letUserSelectRow;
 	
 	OverlayViewController *ovController;
 }
-
-- (NSDictionary *) initializeGuestList;
 
 - (void) searchTableView;
 - (void) doneSearching_Clicked:(id)sender;
