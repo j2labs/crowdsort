@@ -73,6 +73,7 @@ def names(request):
     search is case-insensitive, and the result is a json list of lists, where each element
     is [id, name]
     """
+    values = 'id','name'
     
     result = []
     if 'q' in request.GET:
@@ -84,7 +85,7 @@ def names(request):
     if 'limit' in request.GET:
         guests = guests[:int(request.GET['limit'])]
     
-    for guest in guests:
-        result.append((guest.id, guest.name))
-    
-    return HttpResponse(json.dumps(result))
+    result = dict((g.id, g.name) for g in guests)
+
+    retval = '[{\"fields\": %s}]' % json.dumps(result)
+    return HttpResponse(retval)
