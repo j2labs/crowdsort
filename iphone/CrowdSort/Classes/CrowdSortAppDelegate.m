@@ -24,13 +24,17 @@
 	
 	[window addSubview:[tabBarController view]];
 
-	LoginViewController *_loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginView" bundle:[NSBundle mainBundle]];
-	self.loginViewController = _loginViewController;
-	[_loginViewController release];
-	[tabBarController presentModalViewController:self.loginViewController animated:YES];
+	[self loginScreen:tabBarController];
 	
     // Override point for customization after application launch
     [window makeKeyAndVisible];
+}
+
+- (void)loginScreen:(UIViewController *)viewController {
+	LoginViewController *_loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginView" bundle:[NSBundle mainBundle]];
+	self.loginViewController = _loginViewController;
+	[_loginViewController release];
+	[viewController presentModalViewController:self.loginViewController animated:YES];
 }
 
 
@@ -39,26 +43,31 @@
 }
 
 
-+ (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl {
++ (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error {
+	NSLog(@"Start of runSynchronousQuery:response:error:");
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	//NSString *credentials = [defaults stringForKey:kCredentials];
+	
+	NSString *username = [defaults stringForKey:kUsername];
+	NSString *password = [defaults stringForKey:kPassword];
 	NSString *serverAddr = [defaults stringForKey:kServerAddress];
-	NSString *urlString = [NSString stringWithFormat:@"http://%@%@", serverAddr, queryUrl];
-	NSLog(urlString);
+	NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@%@", username, password, serverAddr];
+	if(queryUrl != nil) {
+		urlString = [NSString stringWithFormat:@"%@%@", urlString, queryUrl];
+	}
+	NSLog(@"urlString :: %@", urlString);
 	
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-	NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	NSString *jsonString = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:response error:error];
+	NSString *jsonString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	
 	// parse the JSON response into an object
 	// Here we're using NSArray since we're parsing an array of JSON status objects
 	NSArray *data = [parser objectWithString:jsonString error:nil];
 	NSDictionary *datum = [data objectAtIndex:0];
 	NSDictionary *fields = [datum objectForKey:@"fields"];
-
-	[parser release];
-	[jsonString release];
+	
+	NSLog(@"End of runSynchronousQuery:response:error:");
 	
 	return fields;
 }

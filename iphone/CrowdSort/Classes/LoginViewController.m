@@ -6,6 +6,7 @@
 //  Copyright 2010 J2 Labs LLC. All rights reserved.
 //
 
+#import "CrowdSortAppDelegate.h"
 #import "LoginViewController.h"
 #import "AppConstants.h"
 
@@ -55,19 +56,14 @@
 	loginButton.enabled = FALSE;
 	
 	// TODO: Replace with real auth system
-	NSLog(@"Server addr %s", [serverAddr UTF8String]);
-	if([username isEqual:@"jd"] && [password isEqual:@"f00"]) {
-		authenticated = YES;
-	}
+	
+	NSLog(@"Starting auth");
+	authenticated = [self checkLoginOnServer:serverAddr withUsername:username withPassword:password];
+	NSLog(@"Completed auth");
 	
 	if(authenticated) {
 		// yay
 		NSLog(@"Authenticated: YES");
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		[defaults setObject:username forKey:kUsername];
-		[defaults setObject:password forKey:kPassword];
-		[defaults setObject:serverAddr forKey:kServerAddress];
-		[defaults synchronize];
 		[self dismissModalViewControllerAnimated:YES];
 	}
 	else {
@@ -85,5 +81,26 @@
 		loginButton.enabled = TRUE;
 	}
 }
+
+
+- (BOOL)checkLoginOnServer:(NSString *)serverAddr withUsername:(NSString *)username withPassword:(NSString *)password {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:username forKey:kUsername];
+	[defaults setObject:password forKey:kPassword];
+	[defaults setObject:serverAddr forKey:kServerAddress];
+	[defaults synchronize];
+	
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:kURLLogin response:&response error:&error];
+	NSLog(@"checkLoginOnServer:withUsername:withPassword: %@", fields);
+	if(fields) {
+		return YES;
+	}
+	else {
+		return NO;
+	}
+}
+
 
 @end

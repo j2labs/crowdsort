@@ -7,17 +7,26 @@
 //
 
 #import "ControlPanelViewController.h"
+#import "AppConstants.h"
+#import "CrowdSortAppDelegate.h"
 
 
 @implementation ControlPanelViewController
 
+@synthesize initNameListButton;
+@synthesize logOutButton;
+
 - (IBAction) initNameList: (id) sender {
 }
 
-- (IBAction) setCrowdSlide: (id) sender {
-}
-
 - (IBAction) logout: (id) sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults removeObjectForKey:kUsername];
+	[defaults removeObjectForKey:kPassword];
+	[defaults removeObjectForKey:kServerAddress];
+	[defaults synchronize];
+	
+	[[[[UIApplication sharedApplication] delegate] loginScreen:self];
 }
 
 /*
@@ -67,6 +76,5 @@
 - (void)dealloc {
     [super dealloc];
 }
-
 
 @end

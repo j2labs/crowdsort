@@ -12,16 +12,13 @@
 @interface ControlPanelViewController : UIViewController {
 	
 	IBOutlet UIButton *initNameListButton;
-	IBOutlet UIButton *setCrowdSlideButton;
 	IBOutlet UIButton *logOutButton;
 }
 
 @property (nonatomic, retain) UIButton *initNameListButton;
-@property (nonatomic, retain) UIButton *setCrowdSlideButton;
 @property (nonatomic, retain) UIButton *logOutButton;
 
 - (IBAction) initNameList: (id) sender;
-- (IBAction) setCrowdSlide: (id) sender;
 - (IBAction) logout: (id) sender;
 
 @end

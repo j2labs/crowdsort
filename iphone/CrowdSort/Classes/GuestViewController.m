@@ -26,10 +26,11 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	guestId = @"2";
+	guestId = @"1";
 	
 	// fetch the guest info here
 	NSDictionary *guestInfo = [self fetchGuestInfo];
+	NSLog(@"Guest Info: %@", guestInfo);
 	
 	NSString *name = [guestInfo objectForKey:@"name"];
 	NSString *table = [guestInfo objectForKey:@"table_name"];
@@ -66,15 +67,20 @@
 }
 
 
-- (NSDictionary*)fetchGuestInfo {
+- (NSDictionary *)fetchGuestInfo {
 	NSString *url = [NSString stringWithFormat:@"%@%@/", kURLGuests, guestId];
-	return [CrowdSortAppDelegate runSynchronousQuery:url];
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
+	return fields;
 }
 
 
 - (IBAction)checkInGuest: (id) sender {
 	NSString *url = [NSString stringWithFormat:@"%@%@/", kURLCheckin, guestId];
-	[CrowdSortAppDelegate runSynchronousQuery:url];
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
 }
 
 
