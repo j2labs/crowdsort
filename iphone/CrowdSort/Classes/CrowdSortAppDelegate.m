@@ -65,6 +65,7 @@
 	// Here we're using NSArray since we're parsing an array of JSON status objects
 	NSArray *data = [parser objectWithString:jsonString error:nil];
 	NSDictionary *datum = [data objectAtIndex:0];
+	NSLog(@"Datum: %@", datum);
 	NSDictionary *fields = [datum objectForKey:@"fields"];
 	
 	NSLog(@"End of runSynchronousQuery:response:error:");

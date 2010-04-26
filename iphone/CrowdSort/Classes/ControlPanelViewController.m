@@ -26,7 +26,7 @@
 	[defaults removeObjectForKey:kServerAddress];
 	[defaults synchronize];
 	
-	[[[[UIApplication sharedApplication] delegate] loginScreen:self];
+	[[[UIApplication sharedApplication] delegate] loginScreen:self];
 }
 
 /*

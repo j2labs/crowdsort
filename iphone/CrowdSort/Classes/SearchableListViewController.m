@@ -10,8 +10,19 @@
 #import "SearchableListViewController.h"
 #import "OverlayViewController.h"
 #import "GuestViewController.h"
+#import "AppConstants.h"
 
 @implementation SearchableListViewController
+
+
+- (NSDictionary *)initializeGuestList {
+	NSString *url = [NSString stringWithFormat:kURLNames];
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
+	return fields;
+}
+
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -19,20 +30,14 @@
 	//Initialize the array.
 	listOfItems = [[NSMutableArray alloc] init];
 	
-	NSArray *notCheckedInArray = [NSArray arrayWithObjects:
-								  @"Dennis, James",
-								  @"Gallogly, Ruth",
-								  @"Harris, Kingsley",
-								  @"Huang, Christine",
-								  @"Merlino, John",
-								  @"Tripp, Peter",
-								  @"Yonosko, Holly",
-								  nil];
-	
+	NSArray *notCheckedInArray = [NSArray arrayWithObjects:@"Dennis, James", @"J2 Labs", nil];
 	NSDictionary *notCheckedInDict = [NSDictionary dictionaryWithObject:notCheckedInArray forKey:@"Not checked in"];
 	
 	NSArray *checkedInArray = [NSArray arrayWithObjects:@"Darabi, Soraya", @"Greenwood, Steve", nil];
 	NSDictionary *checkedInDict = [NSDictionary dictionaryWithObject:checkedInArray forKey:@"Checked in"];
+	
+	NSDictionary *results = [self initializeGuestList];
+	NSLog(@"Results: %@", results);
 	
 	[listOfItems addObject:notCheckedInDict];
 	[listOfItems addObject:checkedInDict];

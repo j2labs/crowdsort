@@ -15,12 +15,14 @@ def view_or_basicauth(view, request, test_func, realm = "", *args, **kwargs):
     if test_func(request.user):
         # Already logged in, just return the view.
         #
+        print u'test_func called'
         return view(request, *args, **kwargs)
 
     # They are not logged in. See if they provided login credentials
     #
     if 'HTTP_AUTHORIZATION' in request.META:
         auth = request.META['HTTP_AUTHORIZATION'].split()
+        print u'view_or_basicauth -- auth:%s' % (auth)
         if len(auth) == 2:
             # NOTE: We are only support basic authentication for now.
             #

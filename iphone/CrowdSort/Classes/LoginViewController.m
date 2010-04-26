@@ -59,6 +59,7 @@
 	
 	NSLog(@"Starting auth");
 	authenticated = [self checkLoginOnServer:serverAddr withUsername:username withPassword:password];
+	
 	NSLog(@"Completed auth");
 	
 	if(authenticated) {
@@ -69,13 +70,6 @@
 	else {
 		// boo!
 		NSLog(@"Authentication failed");
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ERROR" 
-														message:@"Login failed"
-													   delegate:self 
-											  cancelButtonTitle:@"Cancel" 
-											  otherButtonTitles:@"OK", nil];
-		[alert show];
-		[alert release];
 		loginIndicator.hidden = TRUE;
 		[loginIndicator stopAnimating];
 		loginButton.enabled = TRUE;
@@ -93,6 +87,32 @@
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:kURLLogin response:&response error:&error];
+	NSLog(@"error: %@", error);
+	if(error) {
+		NSString *errorMsg = [NSString stringWithFormat:@"Error: %@", [error localizedDescription]];
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+															message:errorMsg
+														   delegate:self
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+		return NO;
+	}
+	NSString *responseUrl = [[response URL] absoluteString];
+	NSLog(@"responseUrl: %@", responseUrl);
+	if(responseUrl == nil) {
+		NSString *errorMsg = [NSString stringWithFormat:@"Error: incorrect username and password"];
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+															message:errorMsg
+														   delegate:self
+												  cancelButtonTitle:@"OK"
+												  otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+		return NO;
+	}
+	
 	NSLog(@"checkLoginOnServer:withUsername:withPassword: %@", fields);
 	if(fields) {
 		return YES;
