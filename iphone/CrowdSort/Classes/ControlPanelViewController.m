@@ -25,6 +25,12 @@
 }
 
 - (IBAction) logout: (id) sender {
+  
+  NSString *url = [NSString stringWithFormat:@"%@", kURLLogout];
+	NSURLResponse *response = nil;
+	NSError *error = nil;
+	[CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
+  
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *serverAddr = [defaults stringForKey:kServerAddress];
 	

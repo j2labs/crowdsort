@@ -15,6 +15,8 @@ class Guest(models.Model):
     arrived = models.BooleanField(_('Arrived'), default=False)
     plus_count = models.IntegerField(_('Additional guests'), default=0)
     plus_counted = models.IntegerField(_('Guests counted'), default=0)
+    date_created = models.DateTimeField(_('Date Created'))
+    date_modified = models.DateTimeField(_('Date Modified'))
 
     def __unicode__(self):
         return u'%s' % (self.name)
@@ -24,5 +26,12 @@ class Guest(models.Model):
     
     def get_absolute_url(self):
         return ('show/', [str(self.id)])
+    
+    def save(self):
+        if self.date_created == None:
+            self.date_created = datetime.now()
+        
+        self.date_modified = datetime.now()
+        super(Guest, self).save()
     
     get_absolute_url = models.permalink(get_absolute_url)
