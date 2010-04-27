@@ -26,7 +26,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	guestId = @"1";
+	guestId = @"0";
 	
 	// fetch the guest info here
 	NSDictionary *guestInfo = [self fetchGuestInfo];
@@ -38,10 +38,10 @@
 	NSString *phone = [guestInfo objectForKey:@"phone_number"];
 	
 	//Display the selected guest.
-	[guestNameLabel setText:name];
-	[tableNumberLabel setText:table];
-	[emailAddressLabel setText:email];
-	[phoneNumberLabel setText:phone];
+	//[guestNameLabel setText:name];
+	//[tableNumberLabel setText:table];
+	//[emailAddressLabel setText:email];
+	//[phoneNumberLabel setText:phone];
 	
 	//Set the title of the navigation bar
 	self.navigationItem.title = [guestNameLabel text];
@@ -68,6 +68,9 @@
 
 
 - (NSDictionary *)fetchGuestInfo {
+	if(guestId == 0) {
+		return nil;
+	}
 	NSString *url = [NSString stringWithFormat:@"%@%@/", kURLGuests, guestId];
 	NSURLResponse *response = nil;
 	NSError *error = nil;

@@ -55,8 +55,6 @@
 	[loginIndicator startAnimating];
 	loginButton.enabled = FALSE;
 	
-	// TODO: Replace with real auth system
-	
 	NSLog(@"Starting auth");
 	authenticated = [self checkLoginOnServer:serverAddr withUsername:username withPassword:password];
 	
@@ -90,8 +88,8 @@
 	
 	//NSLog(@"Fields returned: %@", fields);
 	
-	NSLog(@"error: %@", [error localizedDescription]);
 	if(error) {
+		NSLog(@"Login error: %@", [error localizedDescription]);
 		NSString *errorMsg = [NSString stringWithFormat:@"Error: %@", [error localizedDescription]];
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
 															message:errorMsg
@@ -103,9 +101,10 @@
 		return NO;
 	}
 	NSString *responseUrl = [[response URL] absoluteString];
-	NSLog(@"responseUrl: %@", responseUrl);
 	if(responseUrl == nil) {
-		NSString *errorMsg = [NSString stringWithFormat:@"Error: incorrect username and password"];
+		NSString *msg = @"incorrect username and password";
+		NSString *errorMsg = [NSString stringWithFormat:@"Error: %@", msg];
+		NSLog(@"Login error: %@", msg);
 		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
 															message:errorMsg
 														   delegate:self
@@ -116,13 +115,12 @@
 		return NO;
 	}
 	
-	NSLog(@"checkLoginOnServer:withUsername:withPassword: %@", fields);
 	if(fields) {
-		NSLog(@"YES. Found fields in return value: %@", fields);
+		NSLog(@"Login successful");
 		return YES;
 	}
 	else {
-		NSLog(@"NO. Did not find fields.");
+		NSLog(@"Login denied");
 		return NO;
 	}
 }

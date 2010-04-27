@@ -17,6 +17,7 @@
 @synthesize window;
 @synthesize tabBarController;
 @synthesize loginViewController;
+@synthesize searchableListViewController;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -37,6 +38,11 @@
 	[viewController presentModalViewController:self.loginViewController animated:YES];
 }
 
+- (void)initGuestList {
+	NSLog(@"initGuestList got called");
+	[searchableListViewController initGuestList];
+}
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	// Save data if appropriate
@@ -44,7 +50,6 @@
 
 
 + (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error {
-	NSLog(@"Start of runSynchronousQuery:response:error:");
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSString *username = [defaults stringForKey:kUsername];
@@ -54,7 +59,7 @@
 	if(queryUrl != nil) {
 		urlString = [NSString stringWithFormat:@"%@%@", urlString, queryUrl];
 	}
-	NSLog(@"urlString :: %@", urlString);
+	NSLog(@"CrowdSortAppDelegate -- runSynchronousQuery:response:error: urlString :: %@", urlString);
 	
 	SBJSON *parser = [[SBJSON alloc] init];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -70,15 +75,12 @@
 	NSDictionary *datum = [data objectAtIndex:0]; // {"pk": 1, "model": "guestlist.guest", "fields": {"phone_number": "1231231234", "name": "Dennis, James"}}
 	NSDictionary *fields = [datum objectForKey:@"fields"]; // {"phone_number": "1231231234", "name": "Dennis, James"}
 	
-	NSLog(@"End of runSynchronousQuery:response:error:");
-	
-	//return datum;
 	return fields;
 }
 
 
 - (void)dealloc {
-	[tabBarController release];
+	[loginViewController release];
 	[tabBarController release];
 	[window release];
     [super dealloc];

@@ -15,11 +15,30 @@
 @implementation SearchableListViewController
 
 
-- (NSDictionary *)initializeGuestList {
+- (NSDictionary *)initGuestList {
 	NSString *url = [NSString stringWithFormat:kURLNames];
 	NSURLResponse *response = nil;
 	NSError *error = nil;
 	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
+	NSMutableArray *names = [[NSMutableArray alloc] init];
+	
+	NSLog(@"The names found ::" );
+	for(id key in fields) {
+		NSLog(@"Key: %@  -- Value: %@", key, [fields objectForKey:key]);
+		NSString *name = [fields objectForKey:key];
+		[names addObject:name];
+	}
+	//[names addObject:nil];
+	NSDictionary *defaultDict = [NSDictionary dictionaryWithObject:[NSArray arrayWithArray:names]
+															forKey:kUninitialized];
+	
+	[listOfItems release];
+	listOfItems = [[NSMutableArray alloc] init];
+	[listOfItems addObject:defaultDict];
+	
+	[self.tableView reloadData];
+	
+	[names release];
 	return fields;
 }
 
@@ -30,30 +49,21 @@
 	//Initialize the array.
 	listOfItems = [[NSMutableArray alloc] init];
 	
-	NSArray *defaultList = [NSArray arrayWithObjects:@"J2 Labs", nil];
+	NSArray *defaultList = [NSArray arrayWithObjects:@"please initialize the list", nil];
 	NSDictionary *defaultDict = [NSDictionary dictionaryWithObject:defaultList forKey:kUninitialized];
 	
-	//NSDictionary *results = [self initializeGuestList];
-	//NSLog(@"Results: %@", results);
-	NSLog(@"Got here 1");
 	[listOfItems addObject:defaultDict];
 	
-	NSLog(@"Got here 2");
 	//Initialize the copy array.
 	copyListOfItems = [[NSMutableArray alloc] init];
 	
-	NSLog(@"Got here 3");
 	//Set the title
 	self.navigationItem.title = @"CrowdSort";
 	
 	//Add the search bar
-	NSLog(@"Got here 3.1");
 	self.tableView.tableHeaderView = searchBar;
-	NSLog(@"Got here 3.2");
 	searchBar.autocorrectionType = UITextAutocorrectionTypeNo;
 	
-	
-	NSLog(@"Got here 4");
 	searching = NO;
 	letUserSelectRow = YES;
 }
@@ -97,7 +107,7 @@
 
 - (NSArray *) sectionGroups {
 	//if(!initialized) {
-		return [NSArray arrayWithObjects:kUninitialized];
+		return [NSArray arrayWithObjects:kUninitialized, nil];
 	/*}
 	else {
 		return [NSArray arrayWithObjects:@"Not checked in", @"Checked in",  nil];
@@ -230,11 +240,12 @@
 		return nil;
 }
 
-
+#ifndef __IPHONE_3_0
 - (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
 	//return UITableViewCellAccessoryDetailDisclosureButton;
 	return UITableViewCellAccessoryDisclosureIndicator;
 }
+#endif
 
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
@@ -365,7 +376,7 @@
 		if(titleResultsRange.length > 0) 
 			[copyListOfItems addObject:sTemp];
 	}
-	
+
 	[searchArray release];
 	searchArray = nil;
 }

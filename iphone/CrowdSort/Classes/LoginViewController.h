@@ -24,5 +24,6 @@
 @property (nonatomic, retain) UIActivityIndicatorView *loginIndicator;
 
 - (IBAction) login: (id) sender;
+- (BOOL) checkLoginOnServer:(NSString *)serverAddr withUsername:(NSString *)username withPassword:(NSString *)password;
 
 @end

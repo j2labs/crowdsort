@@ -9,16 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @class LoginViewController;
+@class SearchableListViewController;
 
 @interface CrowdSortAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	UITabBarController *tabBarController;
+	SearchableListViewController *searchableListViewController;
 	LoginViewController *loginViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, retain) IBOutlet SearchableListViewController *searchableListViewController;
 @property (nonatomic, retain) LoginViewController *loginViewController;
+
+- (void)loginScreen:(UIViewController *)viewController;
+- (void)initGuestList;
++ (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error;
 
 @end
 

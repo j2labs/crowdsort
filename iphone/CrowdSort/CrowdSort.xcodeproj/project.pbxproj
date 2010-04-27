@@ -20,6 +20,8 @@
 		692CE6DF117A33EF00906C82 /* SearchableListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CE6DA117A33EF00906C82 /* SearchableListView.xib */; };
 		6944B41611764D0A00C7E1E2 /* SearchableListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */; };
 		6944B4AA11778E0200C7E1E2 /* OverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B4A811778E0200C7E1E2 /* OverlayViewController.m */; };
+		69659697118645EC00C6E804 /* step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 69659695118645EC00C6E804 /* step2.png */; };
+		69659698118645EC00C6E804 /* step1.png in Resources */ = {isa = PBXBuildFile; fileRef = 69659696118645EC00C6E804 /* step1.png */; };
 		6998439F1183AD2F007F5C0F /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 699843941183AD2F007F5C0F /* NSObject+SBJSON.m */; };
 		699843A01183AD2F007F5C0F /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 699843961183AD2F007F5C0F /* NSString+SBJSON.m */; };
 		699843A11183AD2F007F5C0F /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 699843981183AD2F007F5C0F /* SBJSON.m */; };
@@ -54,6 +56,8 @@
 		6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchableListViewController.m; sourceTree = "<group>"; };
 		6944B4A711778E0200C7E1E2 /* OverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayViewController.h; sourceTree = "<group>"; };
 		6944B4A811778E0200C7E1E2 /* OverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayViewController.m; sourceTree = "<group>"; };
+		69659695118645EC00C6E804 /* step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step2.png; sourceTree = "<group>"; };
+		69659696118645EC00C6E804 /* step1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step1.png; sourceTree = "<group>"; };
 		699843921183AD2F007F5C0F /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		699843931183AD2F007F5C0F /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		699843941183AD2F007F5C0F /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 		6944B41211764C0700C7E1E2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				69659695118645EC00C6E804 /* step2.png */,
+				69659696118645EC00C6E804 /* step1.png */,
 				69BF042B11804C9100757C5E /* cs.png */,
 				69BF0410118040B400757C5E /* crowdsortlogo.png */,
 			);
@@ -253,6 +259,8 @@
 				69BF0411118040B400757C5E /* crowdsortlogo.png in Resources */,
 				69BF041D118047EA00757C5E /* ControlPanelView.xib in Resources */,
 				69BF042C11804C9100757C5E /* cs.png in Resources */,
+				69659697118645EC00C6E804 /* step2.png in Resources */,
+				69659698118645EC00C6E804 /* step1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

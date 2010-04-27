@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="15"/>
+			<integer value="11"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -48,42 +48,54 @@
 			<object class="IBUITabBarController" id="279113665">
 				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-				<object class="IBUIViewController" key="IBUISelectedViewController" id="713913187">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="1025968811">
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="149257399">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="499894291">
 						<reference key="IBUITabBar"/>
-						<int key="IBUISystemItemIdentifier">0</int>
+						<int key="IBUISystemItemIdentifier">8</int>
 					</object>
 					<reference key="IBUIParentViewController" ref="279113665"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="657742866">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+					</object>
+					<object class="NSMutableArray" key="IBUIViewControllers">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="IBUIViewController" id="653851492">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="593200794">
+								<reference key="IBUINavigationBar"/>
+								<string key="IBUITitle">CrowdSort</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="149257399"/>
+							<string key="IBUINibName">SearchableListView</string>
+						</object>
+					</object>
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUINavigationController" id="149257399">
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="499894291">
+					<object class="IBUIViewController" id="713913187">
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1025968811">
 							<reference key="IBUITabBar"/>
-							<int key="IBUISystemItemIdentifier">8</int>
+							<int key="IBUISystemItemIdentifier">0</int>
 						</object>
 						<reference key="IBUIParentViewController" ref="279113665"/>
-						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="657742866">
-							<nil key="NSNextResponder"/>
-							<int key="NSvFlags">256</int>
-							<string key="NSFrameSize">{0, 0}</string>
-							<bool key="IBUIOpaque">NO</bool>
-							<bool key="IBUIClipsSubviews">YES</bool>
-							<bool key="IBUIMultipleTouchEnabled">YES</bool>
-						</object>
-						<object class="NSMutableArray" key="IBUIViewControllers">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIViewController" id="653851492">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="593200794">
-									<string key="IBUITitle">CrowdSort</string>
-								</object>
-								<reference key="IBUIParentViewController" ref="149257399"/>
-								<string key="IBUINibName">SearchableListView</string>
-							</object>
-						</object>
 					</object>
-					<reference ref="713913187"/>
+					<reference ref="149257399"/>
+					<object class="IBUIViewController" id="849038238">
+						<string key="IBUITitle">Item 3</string>
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="428969066">
+							<reference key="IBUITabBar"/>
+							<int key="IBUISystemItemIdentifier">1</int>
+						</object>
+						<object class="NSArray" key="IBUIToolbarItems">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+						</object>
+						<reference key="IBUIParentViewController" ref="279113665"/>
+					</object>
 				</object>
 				<object class="IBUITabBar" key="IBUITabBar" id="485677823">
 					<nil key="NSNextResponder"/>
@@ -123,6 +135,14 @@
 						<reference key="destination" ref="279113665"/>
 					</object>
 					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchableListViewController</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="653851492"/>
+					</object>
+					<int key="connectionID">25</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -166,8 +186,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="485677823"/>
-							<reference ref="713913187"/>
 							<reference ref="149257399"/>
+							<reference ref="713913187"/>
+							<reference ref="849038238"/>
 						</object>
 						<reference key="parent" ref="698795704"/>
 					</object>
@@ -225,6 +246,20 @@
 						<reference key="object" ref="499894291"/>
 						<reference key="parent" ref="149257399"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">23</int>
+						<reference key="object" ref="849038238"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="428969066"/>
+						</object>
+						<reference key="parent" ref="279113665"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">24</int>
+						<reference key="object" ref="428969066"/>
+						<reference key="parent" ref="849038238"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -261,7 +296,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{1640, 526}, {320, 480}}</string>
+					<string>{{417, 455}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>ControlPanelViewController</string>
@@ -302,7 +337,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">22</int>
+			<int key="maxID">25</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -316,11 +351,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>initNameList:</string>
 							<string>logout:</string>
-							<string>setCrowdSlide:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -331,11 +364,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>initNameListButton</string>
 							<string>logOutButton</string>
-							<string>setCrowdSlideButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 						</object>
@@ -352,11 +383,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSMutableArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>searchableListViewController</string>
 							<string>tabBarController</string>
 							<string>window</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>SearchableListViewController</string>
 							<string>UITabBarController</string>
 							<string>UIWindow</string>
 						</object>
@@ -372,6 +405,20 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/JSON/NSObject+SBJSON.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/JSON/SBJsonWriter.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

@@ -17,6 +17,9 @@
 @synthesize logOutButton;
 
 - (IBAction) initNameList: (id) sender {
+	NSLog(@"Click initNameList button");
+	
+	[((CrowdSortAppDelegate *)[[UIApplication sharedApplication] delegate]) initGuestList];
 }
 
 - (IBAction) logout: (id) sender {
@@ -26,7 +29,7 @@
 	[defaults removeObjectForKey:kServerAddress];
 	[defaults synchronize];
 	
-	[[[UIApplication sharedApplication] delegate] loginScreen:self];
+	[(CrowdSortAppDelegate *)[[UIApplication sharedApplication] delegate] loginScreen:self];
 }
 
 /*
