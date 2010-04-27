@@ -15,20 +15,35 @@
 
 @synthesize initNameListButton;
 @synthesize logOutButton;
+@synthesize initIndicator;
+@synthesize logOutIndicator;
 
 - (IBAction) initNameList: (id) sender {
-	NSLog(@"Click initNameList button");
 	
-	initNameListButton.enabled = FALSE;
-	[((CrowdSortAppDelegate *)[[UIApplication sharedApplication] delegate]) initGuestList];
-	initNameListButton.enabled = TRUE;
+	initIndicator.hidden = FALSE;
+	[initIndicator startAnimating];
+	
+	[self performSelectorOnMainThread:@selector(callInitGuestList) withObject:nil waitUntilDone:NO];
+
+	initIndicator.hidden = TRUE;
+	[initIndicator stopAnimating];
 }
+
+
+- (void) callInitGuestList {
+	[((CrowdSortAppDelegate *)[[UIApplication sharedApplication] delegate]) initGuestList];
+}
+
 
 - (IBAction) logout: (id) sender {
   
-  NSString *url = [NSString stringWithFormat:@"%@", kURLLogout];
+	logOutIndicator.hidden = FALSE;
+	[logOutIndicator startAnimating];
+	
+	NSString *url = [NSString stringWithFormat:@"%@", kURLLogout];
 	NSURLResponse *response = nil;
 	NSError *error = nil;
+
 	[CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
   
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -48,6 +63,9 @@
 	[defaults removeObjectForKey:kPassword];
 	[defaults removeObjectForKey:kServerAddress];
 	[defaults synchronize];
+	
+	logOutIndicator.hidden = TRUE;
+	[logOutIndicator stopAnimating];
 	
 	[(CrowdSortAppDelegate *)[[UIApplication sharedApplication] delegate] loginScreen:self];
 }

@@ -8,6 +8,7 @@
 
 #import "CrowdSortAppDelegate.h"
 #import "SearchableListViewController.h"
+#import "OverlayViewController.h"
 #import "LoginViewController.h"
 #import "AppConstants.h"
 #import "JSON.h"
@@ -50,6 +51,7 @@
 
 
 + (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error {
+
 	int port = 8000;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

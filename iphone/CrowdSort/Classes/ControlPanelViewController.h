@@ -13,10 +13,15 @@
 	
 	IBOutlet UIButton *initNameListButton;
 	IBOutlet UIButton *logOutButton;
+	IBOutlet UIActivityIndicatorView *initIndicator;
+	IBOutlet UIActivityIndicatorView *logOutIndicator;
 }
 
 @property (nonatomic, retain) UIButton *initNameListButton;
 @property (nonatomic, retain) UIButton *logOutButton;
+@property (nonatomic, retain) UIActivityIndicatorView *initIndicator;
+@property (nonatomic, retain) UIActivityIndicatorView *logOutIndicator;
+
 
 - (IBAction) initNameList: (id) sender;
 - (IBAction) logout: (id) sender;

@@ -22,29 +22,103 @@
 	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
 	NSMutableArray *names = [[NSMutableArray alloc] init];
 	
-	NSLog(@"The names found ::" );
 	for(id key in fields) {
-		NSLog(@"Key: %@  -- Value: %@", key, [fields objectForKey:key]);
+		//NSLog(@"Key: %@  -- Value: %@", key, [fields objectForKey:key]);
 		NSString *name = [fields objectForKey:key];
 		[names addObject:name];
 	}
-	//[names addObject:nil];
-	NSDictionary *defaultDict = [NSDictionary dictionaryWithObject:[NSArray arrayWithArray:names]
-															forKey:kUninitialized];
+	
+	NSArray *newList = [self nameListToGroups:fields];
 	
 	[listOfItems release];
 	listOfItems = [[NSMutableArray alloc] init];
-	[listOfItems addObject:defaultDict];
+	//[listOfItems addObject:defaultDict];
+	[listOfItems setArray:newList];
 	
-	[self.tableView reloadData];
-	
+	[self performSelectorOnMainThread:@selector(updateTableItems) withObject:nil waitUntilDone:NO];
+
 	[names release];
 	return fields;
 }
 
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
+- (void) updateTableItems {
+	[self.tableView reloadData];
+}
+
+
+- (NSMutableArray *)nameListToGroups:(NSDictionary *)idToNameMap {
+	
+	NSMutableDictionary *groupMap = [[NSMutableDictionary alloc] init];
+	NSMutableArray *names = [[NSMutableArray alloc] init];
+	for(id key in idToNameMap) {
+		//NSLog(@"Key: %@  -- Value: %@", key, [fields objectForKey:key]);
+		NSString *name = [idToNameMap objectForKey:key];
+		[names addObject:name];
+	}
+	
+	// Create a data structure for storing name groups like {'A' => (list of A names)}, {'B' => (list of B names)}.
+	NSArray *keys = [NSArray arrayWithObjects:kA,kB,kC,kD,kE,kF,kG,kH,kI,kJ,kK,kL,kM,kN,kO,kP,kQ,kR,kS,kT,kU,kV,kW,kX,kY,kZ,nil];
+	for(NSString *key in keys) {
+		NSMutableArray *arr = [[NSMutableArray alloc] init];
+		NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:arr forKey:key];
+		[arr release];
+		[groupMap setValue:dict forKey:key];
+	}
+	
+	// Organize name by putting them in each name group
+	NSString *firstChar;
+	NSArray *sortedNames = [names sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+	for(NSString *name in sortedNames) {
+		firstChar = [name substringWithRange:NSMakeRange(0, 1)];
+		NSMutableDictionary *dict = [groupMap objectForKey:firstChar];
+		NSMutableArray *letterList = [dict objectForKey:firstChar];
+		[letterList addObject:name];
+	}
+	
+	// Construct map according to table index design
+	NSMutableArray *groups = [[NSMutableArray alloc] init];
+	for(NSString *key in keys) {
+		NSMutableDictionary *dict = ((NSMutableDictionary *)[groupMap objectForKey:key]);
+		[groups addObject:dict];
+	}
+	initialized = YES;
+	NSLog(@"Done");
+	
+	[groupMap autorelease];
+	[groups autorelease];
+	[names autorelease];
+	
+	return groups;
+}
+
+
+- (NSArray *)sectionGroups {
+	if(!initialized) {
+		return [NSArray arrayWithObjects:kUninitialized, nil];
+	}
+	else {
+		return [NSArray arrayWithObjects:kA,kB,kC,kD,kE,kF,kG,kH,kI,kJ,kK,kL,kM,kN,kO,kP,kQ,kR,kS,kT,kU,kV,kW,kX,kY,kZ,nil];
+	}
+}
+
+
+- (NSString *)keyForSection:(NSInteger)section {
+	if(!initialized) {
+		return kUninitialized;
+	}
+	
+	NSArray *sections = [self sectionGroups];
+	if([sections count] >= section) {
+		return [sections objectAtIndex:section];
+	}
+	else {	
+		return kUninitialized;
+	}
+}
+
+
+- (void)initializeView {
 	
 	//Initialize the array.
 	listOfItems = [[NSMutableArray alloc] init];
@@ -69,34 +143,44 @@
 }
 
 
-/*
+#pragma mark -
+#pragma mark View methods
+
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	[self initializeView];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	[self.tableView reloadData];
 }
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
 
 /*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+ - (void)viewDidAppear:(BOOL)animated {
+ [super viewDidAppear:animated];
+ }
+ */
+/*
+ - (void)viewWillDisappear:(BOOL)animated {
+ [super viewWillDisappear:animated];
+ }
+ */
+/*
+ - (void)viewDidDisappear:(BOOL)animated {
+ [super viewDidDisappear:animated];
+ }
+ */
+
+/*
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -105,53 +189,29 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (NSArray *) sectionGroups {
-	//if(!initialized) {
-		return [NSArray arrayWithObjects:kUninitialized, nil];
-	/*}
-	else {
-		return [NSArray arrayWithObjects:@"Not checked in", @"Checked in",  nil];
-	}*/
-}
-
-
-- (NSString *)keyForSection:(NSInteger)section {
-	/*
-	NSArray *sections = [self sectionGroups];
-	if([sections count] >= section) {
-		return [sections objectAtIndex:section];
-	}
-	*/
-	
-	return kUninitialized;
-}
 
 #pragma mark -
 #pragma mark Table view methods
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-	/*if(searching)
+	if(searching)
 		return nil;
 	
-	NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-	[tempArray addObject:@"N"];
-	[tempArray addObject:@"Y"];
-	[tempArray addObject:@"N"];
-	[tempArray addObject:@"Y"];
-	[tempArray addObject:@"N"];
-	[tempArray addObject:@"Y"];
-	[tempArray addObject:@"N"];
-	[tempArray addObject:@"Y"];
-	return tempArray;*/
-	return nil;
+	return [self sectionGroups];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-	/*if(searching)
+	if(searching)
 		return -1;
 	
-	return index % 2;*/
-	return -1;
+	NSArray *arr = [self sectionGroups];
+	NSString *newIdx = [arr objectAtIndex:index];
+	if(newIdx != nil) {
+		return index;
+	}
+	else {
+		return -1;
+	}
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -227,6 +287,7 @@
 	//Initialize the detail view controller and display it.
 	GuestViewController *gvController = [[GuestViewController alloc] initWithNibName:@"GuestView" bundle:[NSBundle mainBundle]];
 	[[gvController guestNameLabel] setText:guestName];
+	gvController.guestId = @"1";
 	[self.navigationController pushViewController:gvController animated:YES];
 	[gvController release];
 	gvController = nil;
@@ -299,7 +360,6 @@
 
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar {
-	
 	if(searching)
 		return;
 	
@@ -335,7 +395,6 @@
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
 	// Remove all objects first
 	[copyListOfItems removeAllObjects];
-	
 	if([searchText length] > 0) {
 		[ovController.view removeFromSuperview];
 		searching = YES;
@@ -373,7 +432,7 @@
 	for(NSString *sTemp in searchArray) {
 		NSRange titleResultsRange = [sTemp rangeOfString:searchText options:NSCaseInsensitiveSearch];
 		
-		if(titleResultsRange.length > 0) 
+		if(titleResultsRange.length > 0 && titleResultsRange.location == 0) 
 			[copyListOfItems addObject:sTemp];
 	}
 

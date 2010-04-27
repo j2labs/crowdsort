@@ -22,6 +22,8 @@
 }
 
 - (NSDictionary *) initGuestList;
+- (void) initializeView;
+- (NSMutableArray *)nameListToGroups:(NSDictionary *)idToNameMap;
 
 - (void) searchTableView;
 - (void) doneSearching_Clicked:(id)sender;
