@@ -20,6 +20,7 @@
 		692CE6DF117A33EF00906C82 /* SearchableListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 692CE6DA117A33EF00906C82 /* SearchableListView.xib */; };
 		6944B41611764D0A00C7E1E2 /* SearchableListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */; };
 		6944B4AA11778E0200C7E1E2 /* OverlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944B4A811778E0200C7E1E2 /* OverlayViewController.m */; };
+		6944DA3C1187257000235EF3 /* Guest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6944DA3B1187257000235EF3 /* Guest.m */; };
 		69659697118645EC00C6E804 /* step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 69659695118645EC00C6E804 /* step2.png */; };
 		69659698118645EC00C6E804 /* step1.png in Resources */ = {isa = PBXBuildFile; fileRef = 69659696118645EC00C6E804 /* step1.png */; };
 		6998439F1183AD2F007F5C0F /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 699843941183AD2F007F5C0F /* NSObject+SBJSON.m */; };
@@ -56,6 +57,8 @@
 		6944B41411764D0A00C7E1E2 /* SearchableListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchableListViewController.m; sourceTree = "<group>"; };
 		6944B4A711778E0200C7E1E2 /* OverlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayViewController.h; sourceTree = "<group>"; };
 		6944B4A811778E0200C7E1E2 /* OverlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayViewController.m; sourceTree = "<group>"; };
+		6944DA3A1187257000235EF3 /* Guest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guest.h; sourceTree = "<group>"; };
+		6944DA3B1187257000235EF3 /* Guest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guest.m; sourceTree = "<group>"; };
 		69659695118645EC00C6E804 /* step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step2.png; sourceTree = "<group>"; };
 		69659696118645EC00C6E804 /* step1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = step1.png; sourceTree = "<group>"; };
 		699843921183AD2F007F5C0F /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -111,6 +114,8 @@
 				6944B4A811778E0200C7E1E2 /* OverlayViewController.m */,
 				69BF0419118047D700757C5E /* ControlPanelViewController.h */,
 				69BF041A118047D700757C5E /* ControlPanelViewController.m */,
+				6944DA3A1187257000235EF3 /* Guest.h */,
+				6944DA3B1187257000235EF3 /* Guest.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				699843A21183AD2F007F5C0F /* SBJsonBase.m in Sources */,
 				699843A31183AD2F007F5C0F /* SBJsonParser.m in Sources */,
 				699843A41183AD2F007F5C0F /* SBJsonWriter.m in Sources */,
+				6944DA3C1187257000235EF3 /* Guest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

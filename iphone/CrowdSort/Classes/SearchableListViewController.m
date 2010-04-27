@@ -11,6 +11,7 @@
 #import "OverlayViewController.h"
 #import "GuestViewController.h"
 #import "AppConstants.h"
+#import "Guest.h"
 
 @implementation SearchableListViewController
 
