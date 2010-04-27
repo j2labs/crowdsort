@@ -50,12 +50,14 @@
 
 
 + (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error {
+	int port = 8000;
+	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSString *username = [defaults stringForKey:kUsername];
 	NSString *password = [defaults stringForKey:kPassword];
 	NSString *serverAddr = [defaults stringForKey:kServerAddress];
-	NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@%@", username, password, serverAddr];
+	NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@%@:%d", username, password, serverAddr, port];
 	if(queryUrl != nil) {
 		urlString = [NSString stringWithFormat:@"%@%@", urlString, queryUrl];
 	}

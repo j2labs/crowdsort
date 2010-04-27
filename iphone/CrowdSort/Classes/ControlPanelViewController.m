@@ -19,11 +19,25 @@
 - (IBAction) initNameList: (id) sender {
 	NSLog(@"Click initNameList button");
 	
+	initNameListButton.enabled = FALSE;
 	[((CrowdSortAppDelegate *)[[UIApplication sharedApplication] delegate]) initGuestList];
+	initNameListButton.enabled = TRUE;
 }
 
 - (IBAction) logout: (id) sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *serverAddr = [defaults stringForKey:kServerAddress];
+	
+	// first, clear any cookies
+	NSLog(@"Clearing cookies");
+	NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+	NSArray *cookies = [cookieStorage cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", serverAddr]]];
+    for (NSHTTPCookie *cookie in cookies) {
+        [cookieStorage deleteCookie:cookie];
+		NSLog(@"Cookie: %@", cookie);
+    }
+	NSLog(@"Done clearing cookies");
+	
 	[defaults removeObjectForKey:kUsername];
 	[defaults removeObjectForKey:kPassword];
 	[defaults removeObjectForKey:kServerAddress];
