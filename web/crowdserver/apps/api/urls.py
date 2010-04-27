@@ -7,6 +7,7 @@ urlpatterns = patterns('api.views',
 
     (r'^$', lambda request: HttpResponseRedirect(reverse('home'))),
     (r'^login/$', 'login'),
+    (r'^logout/$', 'logout_user'),
     (r'^guests/(?P<guest_id>\d+)/$', 'detail'),
     (r'^names/$', 'names'),
 )

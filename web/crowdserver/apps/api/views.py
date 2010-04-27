@@ -2,6 +2,8 @@ import json
 
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.core import serializers
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 from guestlist.models import Guest
 from basicauth import logged_in_or_basicauth
@@ -16,6 +18,12 @@ def login(request):
     json_serializer = serializers.get_serializer("json")()
     return HttpResponse(json_serializer.serialize((request.user,), ensure_ascii=False))
 
+@login_required
+def logout_user(request):
+
+    logout(request)
+    return HttpResponse("Logout successful.")
+
 @logged_in_or_basicauth()
 def detail(request, guest_id):
     """
@@ -25,6 +33,7 @@ def detail(request, guest_id):
     if request.method == 'POST':
         return update_guest(request, guest_id)
     
+    print guest_id
     guest = Guest.objects.get(id=guest_id)
     json_serializer = serializers.get_serializer("json")()
     return HttpResponse(json_serializer.serialize((guest,), ensure_ascii=False))
