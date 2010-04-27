@@ -43,8 +43,8 @@ def make_guest(row):
     """
     
     # Change these if the csv shows up in a different order
-    idx_first_name = 0
-    idx_last_name = 1
+    idx_first_name = 1
+    idx_last_name = 0
     idx_iml_num = 2
     idx_re_id = 3
     idx_table_name = 4
