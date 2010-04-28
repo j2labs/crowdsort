@@ -20,7 +20,7 @@ def login(request):
 
 @login_required
 def logout_user(request):
-
+    
     logout(request)
     return HttpResponse("Logout successful.")
 
