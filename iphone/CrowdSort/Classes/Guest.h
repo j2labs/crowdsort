@@ -17,10 +17,10 @@
 	NSString *phone_number;
 }
 
-@property (nonatomic, retain) NSString gid;
-@property (nonatomic, retain) NSString name;
-@property (nonatomic, retain) NSString table_name;
-@property (nonatomic, retain) NSString email;
-@property (nonatomic, retain) NSString phone_number;
+@property (nonatomic, retain) NSString *gid;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *table_name;
+@property (nonatomic, retain) NSString *email;
+@property (nonatomic, retain) NSString *phone_number;
 
 @end
