@@ -73,7 +73,10 @@
 	
 	NSLog(@"Starting auth");
 	
-	NSString *apiURL = [NSString stringWithFormat:@"http://%@:8000%@", serverAddr, kURLLogin];
+	//NSString *apiURL = [NSString stringWithFormat:@"http://%@:8000%@", serverAddr, kURLLogin];
+	NSLog(@"Delegate : %@", [[UIApplication sharedApplication] delegate]);
+	NSLog(@"kURLLogin : %@", kURLLogin);
+	NSString *apiURL = [CrowdSortAppDelegate genURLForAPI:kURLLogin];
 	responseData = [[NSMutableData data] retain];
     baseURL = [[NSURL URLWithString:apiURL] retain];
 	

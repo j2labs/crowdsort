@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class CrowdSortAppDelegate;
 
 @interface LoginViewController : UIViewController {
 	IBOutlet UITextField *usernameField;

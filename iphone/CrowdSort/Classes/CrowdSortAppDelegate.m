@@ -58,7 +58,7 @@
  * genURLForAPI:
  *   URL generation is predictable. Redirects are handled in connection:willSendRequest:redirectResponse:
  */
-- (NSString *)genURLForAPI:(NSString *)apiKey {
++ (NSString *)genURLForAPI:(NSString *)apiKey {
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *username = [defaults stringForKey:kUsername];
