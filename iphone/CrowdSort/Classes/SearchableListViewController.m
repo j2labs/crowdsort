@@ -39,6 +39,20 @@
 }
 
 
+/* 
+ * nameListToGroups:
+ *    This function takes an array of arrays representing the guest info
+ *    and builds a structure that maps to the tableview and sections model.
+ *    The structure is a list of dictionaries that each contain only one
+ *    key, the first initial of the last name.
+ *    (
+ *      {'A': (1, 'name', 'table', 'email', 'phone'), (2, 'name', 'table', 'email', 'phone')}
+ *      {'B': (3, 'name', 'table', 'email', 'phone'), ...},
+ *      ...
+ *      {'Z': (n, 'name', 'table', 'email', 'phone'), ...}
+ *    )
+ *
+ */
 - (NSMutableArray *)nameListToGroups:(NSArray *)guestData {
 	
 	NSMutableDictionary *groupMap = [[NSMutableDictionary alloc] init];
@@ -58,7 +72,7 @@
 		[groupMap setValue:dict forKey:key];
 	}
 	
-	// Organize name by putting them in each name group
+	// Organize names groups by their first letter
 	NSString *firstChar;
 	NSArray *sortedNames = [names sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 	for(NSString *name in sortedNames) {
