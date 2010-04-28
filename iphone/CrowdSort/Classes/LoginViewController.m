@@ -6,11 +6,14 @@
 //  Copyright 2010 J2 Labs LLC. All rights reserved.
 //
 
+
 #import "CrowdSortAppDelegate.h"
 #import "LoginViewController.h"
 #import "AppConstants.h"
 
+
 @implementation LoginViewController
+
 
 @synthesize usernameField;
 @synthesize passwordField;
@@ -47,7 +50,7 @@
 
 
 #pragma mark - 
-#pragma mark Authentication related code
+#pragma mark Button functions
 
 
 - (IBAction) login: (id) sender {
@@ -80,11 +83,45 @@
 	NSLog(@"Completed auth");
 }
 
+
 - (IBAction) cancel: (id) sender {
 	
 	NSLog(@"Cancel button pressed");
 	[connectionToURL cancel];
 	[self reenableUIControls];
+}
+
+
+#pragma mark -
+#pragma mark Callback / UI related functions
+
+
+- (void) disableUIControls {
+	
+	loginIndicator.hidden = FALSE;
+	[loginIndicator startAnimating];
+	
+	[cancelButton setHidden:FALSE];
+	cancelButton.enabled = TRUE;
+	
+	loginButton.enabled = FALSE;
+	usernameField.enabled = FALSE;
+	passwordField.enabled = FALSE;
+	serverAddrField.enabled = FALSE;
+}
+
+- (void) reenableUIControls {
+	
+	loginIndicator.hidden = TRUE;
+	[loginIndicator stopAnimating];
+	
+	[cancelButton setHidden:TRUE];
+	cancelButton.enabled = FALSE;
+	
+	loginButton.enabled = TRUE;
+	usernameField.enabled = TRUE;
+	passwordField.enabled = TRUE;
+	serverAddrField.enabled = TRUE;
 }
 
 
@@ -117,7 +154,7 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // Once this method is invoked, "responseData" contains the complete result
+    // Having this method called means auth went through
 	NSLog(@"connection: %@", connection);
 	
 	[self dismissModalViewControllerAnimated:YES];
@@ -154,37 +191,5 @@
 	[self reenableUIControls];
 }
 
-
-#pragma mark -
-#pragma mark Callback / UI related functions
-
-
-- (void) disableUIControls {
-	
-	loginIndicator.hidden = FALSE;
-	[loginIndicator startAnimating];
-	
-	[cancelButton setHidden:FALSE];
-	cancelButton.enabled = TRUE;
-	
-	loginButton.enabled = FALSE;
-	usernameField.enabled = FALSE;
-	passwordField.enabled = FALSE;
-	serverAddrField.enabled = FALSE;
-}
-
-- (void) reenableUIControls {
-	
-	loginIndicator.hidden = TRUE;
-	[loginIndicator stopAnimating];
-	
-	[cancelButton setHidden:TRUE];
-	cancelButton.enabled = FALSE;
-	
-	loginButton.enabled = TRUE;
-	usernameField.enabled = TRUE;
-	passwordField.enabled = TRUE;
-	serverAddrField.enabled = TRUE;
-}
 
 @end
