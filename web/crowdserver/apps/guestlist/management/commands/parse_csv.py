@@ -3,7 +3,7 @@ from django.db.transaction import commit_on_success
 
 from guestlist.models import Guest
 
-import csv
+from simple_csv import DudeUrGettinACSV
 import os
 from datetime import datetime
 
@@ -23,13 +23,12 @@ class Command(LabelCommand):
         else:
             print 'importing %s...' % (label,)
             f = open(label, 'rU')
-            line_reader = csv.reader(f, dialect=csv.excel)
-            headers = line_reader.next()
+            line_reader = DudeUrGettinACSV(f)
             for row in line_reader:
+                print row
                 g = make_guest(row)
                 print g
                 g.save()
-
 
 def make_guest(row):
     """
