@@ -94,7 +94,7 @@ def names(request):
     if 'limit' in request.GET:
         guests = guests[:int(request.GET['limit'])]
     
-    result = dict((g.id, g.name) for g in guests)
+    result = [(g.id, g.name, g.table_name, g.email, g.phone_number) for g in guests]
 
     retval = '[{\"fields\": %s}]' % json.dumps(result)
     return HttpResponse(retval)

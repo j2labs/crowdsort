@@ -84,7 +84,7 @@
 	
 	NSURLResponse *response = nil;
 	NSError *error = nil;
-	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:kURLLogin response:&response error:&error];
+	NSDictionary *fields = (NSDictionary *)[CrowdSortAppDelegate runSynchronousQuery:kURLLogin response:&response error:&error];
 	
 	//NSLog(@"Fields returned: %@", fields);
 	
