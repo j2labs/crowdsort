@@ -17,6 +17,10 @@
 @synthesize serverAddrField;
 @synthesize loginButton;
 @synthesize loginIndicator;
+@synthesize cancelButton;
+@synthesize responseData;
+@synthesize baseURL;
+@synthesize connectionToURL;
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -42,8 +46,12 @@
 }
 
 
+#pragma mark - 
+#pragma mark Authentication related code
+
+
 - (IBAction) login: (id) sender {
-	BOOL authenticated = NO;
+	
 	[usernameField resignFirstResponder];
 	[passwordField resignFirstResponder];
 	[serverAddrField resignFirstResponder];
@@ -52,79 +60,131 @@
 	NSString *password = [passwordField text];
 	NSString *serverAddr = [serverAddrField text];
 	
-	loginIndicator.hidden = FALSE;
-	[loginIndicator startAnimating];
-	loginButton.enabled = FALSE;
-	
-	NSLog(@"Starting auth");
-	authenticated = [self checkLoginOnServer:serverAddr withUsername:username withPassword:password];
-	
-	NSLog(@"Completed auth");
-	
-	if(authenticated) {
-		// yay
-		NSLog(@"Authenticated: YES");
-		[self dismissModalViewControllerAnimated:YES];
-	}
-	else {
-		// boo!
-		NSLog(@"Authentication failed");
-		loginIndicator.hidden = TRUE;
-		[loginIndicator stopAnimating];
-		loginButton.enabled = TRUE;
-	}
-}
-
-
-- (BOOL) checkLoginOnServer:(NSString *)serverAddr withUsername:(NSString *)username withPassword:(NSString *)password {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults setObject:username forKey:kUsername];
 	[defaults setObject:password forKey:kPassword];
 	[defaults setObject:serverAddr forKey:kServerAddress];
 	[defaults synchronize];
 	
-	NSURLResponse *response = nil;
-	NSError *error = nil;
-	NSDictionary *fields = (NSDictionary *)[CrowdSortAppDelegate runSynchronousQuery:kURLLogin response:&response error:&error];
+	[self disableUIControls];
 	
-	//NSLog(@"Fields returned: %@", fields);
+	NSLog(@"Starting auth");
 	
-	if(error) {
-		NSLog(@"Login error: %@", [error localizedDescription]);
-		NSString *errorMsg = [NSString stringWithFormat:@"Error: %@", [error localizedDescription]];
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-															message:errorMsg
-														   delegate:self
-												  cancelButtonTitle:@"OK"
-												  otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];
-		return NO;
-	}
-	NSString *responseUrl = [[response URL] absoluteString];
-	if(responseUrl == nil) {
-		NSString *msg = @"incorrect username and password";
-		NSString *errorMsg = [NSString stringWithFormat:@"Error: %@", msg];
-		NSLog(@"Login error: %@", msg);
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-															message:errorMsg
-														   delegate:self
-												  cancelButtonTitle:@"OK"
-												  otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];
-		return NO;
-	}
+	NSString *apiURL = [NSString stringWithFormat:@"http://%@:8000%@", serverAddr, kURLLogin];
+	responseData = [[NSMutableData data] retain];
+    baseURL = [[NSURL URLWithString:apiURL] retain];
 	
-	if(fields) {
-		NSLog(@"Login successful");
-		return YES;
-	}
-	else {
-		NSLog(@"Login denied");
-		return NO;
-	}
+	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:apiURL]];
+    connectionToURL = [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
+	
+	NSLog(@"Completed auth");
 }
 
+- (IBAction) cancel: (id) sender {
+	
+	NSLog(@"Cancel button pressed");
+	[connectionToURL cancel];
+	[self reenableUIControls];
+}
+
+
+#pragma mark -
+#pragma mark NSURLConnection callbacks
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	NSLog(@"Login error: %@", [error localizedDescription]);
+	
+	NSString *errorMsg = [NSString stringWithFormat:@"Error: %@", [error localizedDescription]];
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+														message:errorMsg
+													   delegate:self
+											  cancelButtonTitle:@"OK"
+											  otherButtonTitles:nil];
+	[alertView show];
+	[alertView release];
+	
+	[self reenableUIControls];
+	
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // Once this method is invoked, "responseData" contains the complete result
+	NSLog(@"connection: %@", connection);
+	
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (NSURLRequest *)connection:(NSURLConnection *)connection
+			 willSendRequest:(NSURLRequest *)request
+			redirectResponse:(NSURLResponse *)redirectResponse
+{
+    [baseURL autorelease];
+    baseURL = [[request URL] retain];
+    return request;
+}
+
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+	NSLog(@"connection:didReceiveAuthenticationChallenge: %@", challenge);
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *username = [defaults stringForKey:kUsername];
+	NSString *password = [defaults stringForKey:kPassword];
+	
+	if ([challenge previousFailureCount] == 0)
+	{
+		[[challenge sender] useCredential:[NSURLCredential credentialWithUser:username
+																	 password:password
+																  persistence:NSURLCredentialPersistenceNone]
+			   forAuthenticationChallenge:challenge];
+	}
+	else {
+		[[challenge sender] cancelAuthenticationChallenge:challenge];  
+	}
+	
+	[self reenableUIControls];
+}
+
+
+#pragma mark -
+#pragma mark Callback / UI related functions
+
+
+- (void) disableUIControls {
+	
+	loginIndicator.hidden = FALSE;
+	[loginIndicator startAnimating];
+	
+	[cancelButton setHidden:FALSE];
+	cancelButton.enabled = TRUE;
+	
+	loginButton.enabled = FALSE;
+	usernameField.enabled = FALSE;
+	passwordField.enabled = FALSE;
+	serverAddrField.enabled = FALSE;
+}
+
+- (void) reenableUIControls {
+	
+	loginIndicator.hidden = TRUE;
+	[loginIndicator stopAnimating];
+	
+	[cancelButton setHidden:TRUE];
+	cancelButton.enabled = FALSE;
+	
+	loginButton.enabled = TRUE;
+	usernameField.enabled = TRUE;
+	passwordField.enabled = TRUE;
+	serverAddrField.enabled = TRUE;
+}
 
 @end

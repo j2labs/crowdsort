@@ -50,15 +50,36 @@
 }
 
 
+#pragma mark -
+#pragma mark API / request functions
+
+
+/*
+ * genURLForAPI:
+ *   URL generation is predictable. Redirects are handled in connection:willSendRequest:redirectResponse:
+ */
+- (NSString *)genURLForAPI:(NSString *)apiKey {
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *username = [defaults stringForKey:kUsername];
+	NSString *password = [defaults stringForKey:kPassword];
+	NSString *serverAddr = [defaults stringForKey:kServerAddress];
+	
+	NSString *port = @"8000";
+	
+	return [NSString stringWithFormat:@"http://%@:%@@%@:%@%@", username, password, serverAddr, port, apiKey];
+}
+
+
 + (NSObject *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error {
 
 	int port = 8000;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
 	NSString *username = [defaults stringForKey:kUsername];
 	NSString *password = [defaults stringForKey:kPassword];
 	NSString *serverAddr = [defaults stringForKey:kServerAddress];
+	
 	NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@%@:%d", username, password, serverAddr, port];
 	if(queryUrl != nil) {
 		urlString = [NSString stringWithFormat:@"%@%@", urlString, queryUrl];

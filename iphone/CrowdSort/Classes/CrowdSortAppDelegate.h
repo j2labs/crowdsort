@@ -25,6 +25,8 @@
 
 - (void)loginScreen:(UIViewController *)viewController;
 - (void)initGuestList;
+- (void)genUrlForAPI:(NSString *)apiKey;
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge vc:(UIViewController *)vc;
 + (NSObject *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error;
 
 @end

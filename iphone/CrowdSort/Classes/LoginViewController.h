@@ -15,6 +15,10 @@
 	IBOutlet UITextField *serverAddrField;
 	IBOutlet UIButton *loginButton;
 	IBOutlet UIActivityIndicatorView *loginIndicator;
+	IBOutlet UIButton *cancelButton;
+	NSMutableData *responseData;
+	NSURL *baseURL;
+	NSURLConnection *connectionToURL;
 }
 
 @property (nonatomic, retain) UITextField *usernameField;
@@ -22,8 +26,14 @@
 @property (nonatomic, retain) UITextField *serverAddrField;
 @property (nonatomic, retain) UIButton *loginButton;
 @property (nonatomic, retain) UIActivityIndicatorView *loginIndicator;
+@property (nonatomic, retain) UIButton *cancelButton;
+@property (nonatomic, retain) NSMutableData *responseData;
+@property (nonatomic, retain) NSURL *baseURL;
+@property (nonatomic, retain) NSURLConnection *connectionToURL;
 
 - (IBAction) login: (id) sender;
-- (BOOL) checkLoginOnServer:(NSString *)serverAddr withUsername:(NSString *)username withPassword:(NSString *)password;
+- (IBAction) cancel: (id) sender;
+- (void) disableUIControls;
+- (void) reenableUIControls;
 
 @end
