@@ -50,7 +50,7 @@
 }
 
 
-+ (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error {
++ (NSObject *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error {
 
 	int port = 8000;
 	
@@ -77,7 +77,7 @@
 	// Json strings from Django look like this:
 	// [{"pk": 1, "model": "guestlist.guest", "fields": {"phone_number": "1231231234", "name": "Dennis, James"}}]
 	NSDictionary *datum = [data objectAtIndex:0]; // {"pk": 1, "model": "guestlist.guest", "fields": {"phone_number": "1231231234", "name": "Dennis, James"}}
-	NSDictionary *fields = [datum objectForKey:@"fields"]; // {"phone_number": "1231231234", "name": "Dennis, James"}
+	NSObject *fields = [datum objectForKey:@"fields"]; // {"phone_number": "1231231234", "name": "Dennis, James"}
 	
 	return fields;
 }

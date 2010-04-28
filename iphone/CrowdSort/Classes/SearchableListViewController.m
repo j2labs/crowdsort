@@ -16,45 +16,50 @@
 @implementation SearchableListViewController
 
 
-- (NSDictionary *)initGuestList {
+- (void)initGuestList {
+	
 	NSString *url = [NSString stringWithFormat:kURLNames];
 	NSURLResponse *response = nil;
 	NSError *error = nil;
-	NSDictionary *fields = [CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
-	NSMutableArray *names = [[NSMutableArray alloc] init];
-	
-	for(id key in fields) {
-		//NSLog(@"Key: %@  -- Value: %@", key, [fields objectForKey:key]);
-		NSString *name = [fields objectForKey:key];
-		[names addObject:name];
-	}
+	NSArray *fields = (NSArray *)[CrowdSortAppDelegate runSynchronousQuery:url response:&response error:&error];
 	
 	NSArray *newList = [self nameListToGroups:fields];
 	
 	[listOfItems release];
 	listOfItems = [[NSMutableArray alloc] init];
-	//[listOfItems addObject:defaultDict];
 	[listOfItems setArray:newList];
 	
 	[self performSelectorOnMainThread:@selector(updateTableItems) withObject:nil waitUntilDone:NO];
-
-	[names release];
-	return fields;
 }
 
 
 - (void) updateTableItems {
+	
 	[self.tableView reloadData];
 }
 
 
-- (NSMutableArray *)nameListToGroups:(NSDictionary *)idToNameMap {
+/* 
+ * nameListToGroups:
+ *    This function takes an array of arrays representing the guest info
+ *    and builds a structure that maps to the tableview and sections model.
+ *    The structure is a list of dictionaries that each contain only one
+ *    key, the first initial of the last name.
+ *    (
+ *      {'A': (1, 'name', 'table', 'email', 'phone'), (2, 'name', 'table', 'email', 'phone')}
+ *      {'B': (3, 'name', 'table', 'email', 'phone'), ...},
+ *      ...
+ *      {'Z': (n, 'name', 'table', 'email', 'phone'), ...}
+ *    )
+ *
+ */
+- (NSMutableArray *)nameListToGroups:(NSArray *)guestData {
 	
 	NSMutableDictionary *groupMap = [[NSMutableDictionary alloc] init];
 	NSMutableArray *names = [[NSMutableArray alloc] init];
-	for(id key in idToNameMap) {
+	for(NSArray *guestDatum in guestData) {
 		//NSLog(@"Key: %@  -- Value: %@", key, [fields objectForKey:key]);
-		NSString *name = [idToNameMap objectForKey:key];
+		NSString *name = [guestDatum objectAtIndex:kNamesName];
 		[names addObject:name];
 	}
 	
@@ -67,7 +72,7 @@
 		[groupMap setValue:dict forKey:key];
 	}
 	
-	// Organize name by putting them in each name group
+	// Organize names groups by their first letter
 	NSString *firstChar;
 	NSArray *sortedNames = [names sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 	for(NSString *name in sortedNames) {
@@ -99,6 +104,7 @@
 		return [NSArray arrayWithObjects:kUninitialized, nil];
 	}
 	else {
+		// @"{search}", figure out how to use this!
 		return [NSArray arrayWithObjects:kA,kB,kC,kD,kE,kF,kG,kH,kI,kJ,kK,kL,kM,kN,kO,kP,kQ,kR,kS,kT,kU,kV,kW,kX,kY,kZ,nil];
 	}
 }
@@ -186,13 +192,12 @@
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
 	// Release any cached data, images, etc that aren't in use.
 }
 
 
 #pragma mark -
-#pragma mark Table view methods
+#pragma mark Table index methods
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
 	if(searching)
@@ -214,6 +219,11 @@
 		return -1;
 	}
 }
+
+
+#pragma mark -
+#pragma mark Table view methods
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	if(searching)

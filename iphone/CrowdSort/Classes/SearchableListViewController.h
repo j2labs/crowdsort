@@ -21,9 +21,9 @@
 	OverlayViewController *ovController;
 }
 
-- (NSDictionary *) initGuestList;
+- (void) initGuestList;
 - (void) initializeView;
-- (NSMutableArray *)nameListToGroups:(NSDictionary *)idToNameMap;
+- (NSMutableArray *)nameListToGroups:(NSArray *)guestData;
 
 - (void) searchTableView;
 - (void) doneSearching_Clicked:(id)sender;

@@ -25,7 +25,7 @@
 
 - (void)loginScreen:(UIViewController *)viewController;
 - (void)initGuestList;
-+ (NSDictionary *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error;
++ (NSObject *)runSynchronousQuery:(NSString *)queryUrl response:(NSURLResponse **)response error:(NSError **)error;
 
 @end
 

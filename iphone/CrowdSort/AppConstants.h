@@ -10,6 +10,13 @@
 #define kURLNames @"/api/names/"
 #define kURLCheckin @"/api/checkin/"
 
+// API keys
+#define kNamesGid 0
+#define kNamesName 1
+#define kNamesTableName 2
+#define kNamesEmail 3
+#define kNamesPhone 4
+
 // Table keys
 #define kUninitialized @"..."
 #define kA @"A"
