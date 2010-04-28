@@ -197,7 +197,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>6955B2B111889D180084FCAA</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>GuestViewController.m</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>6955B2B211889D180084FCAA</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>GuestViewController.m</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>6955B2B311889D180084FCAA</string>
+						<key>history</key>
+						<array>
+							<string>6955B2A411889CF40084FCAA</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1029, 481}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>-21 56 1029 522 0 0 1680 1028 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>1189</integer>
@@ -228,6 +269,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -276,7 +319,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>8</integer>
+									<integer>7</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -312,14 +355,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>LoginViewController.m</string>
+								<string>LoginViewController.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -327,11 +368,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>LoginViewController.m</string>
+										<string>LoginViewController.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>6955B29211889C370084FCAA</string>
+										<string>6955B2AF11889D180084FCAA</string>
 										<key>history</key>
 										<array>
 											<string>6944B49811778C6900C7E1E2</string>
@@ -351,8 +392,8 @@
 											<string>6955B23811889A110084FCAA</string>
 											<string>6955B28A11889C370084FCAA</string>
 											<string>6955B28B11889C370084FCAA</string>
-											<string>6955B28C11889C370084FCAA</string>
-											<string>6955B28D11889C370084FCAA</string>
+											<string>6955B29F11889CED0084FCAA</string>
+											<string>6955B2A011889CED0084FCAA</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -459,6 +500,7 @@
 											<string>6955B28F11889C370084FCAA</string>
 											<string>6955B29011889C370084FCAA</string>
 											<string>6955B29111889C370084FCAA</string>
+											<string>6955B2A111889CED0084FCAA</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -497,7 +539,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>6955B29311889C370084FCAA</string>
+										<string>6955B2B011889D180084FCAA</string>
 										<key>history</key>
 										<array>
 											<string>6944B49811778C6900C7E1E2</string>
@@ -746,8 +788,9 @@
 		<string>6955B1FF118892110084FCAA</string>
 		<string>6955B200118892110084FCAA</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>6944B40411764B7300C7E1E2</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>6955B2B111889D180084FCAA</string>
 		<string>/Users/jd/Projects/crowdsort/iphone/CrowdSort/CrowdSort.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -767,12 +810,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>LoginViewController.m</string>
+								<string>ControlPanelViewController.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -789,8 +834,6 @@
 							<string>260pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -841,7 +884,7 @@
 			<key>WindowToolGUID</key>
 			<string>6944B40411764B7300C7E1E2</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>

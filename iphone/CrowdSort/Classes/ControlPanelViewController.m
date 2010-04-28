@@ -48,8 +48,6 @@
   
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSString *serverAddr = [defaults stringForKey:kServerAddress];
-	NSString *username = [defaults stringForKey:kUsername];
-	NSString *password = [defaults stringForKey:kPassword];
 	
 	// first, clear any cookies
 	NSLog(@"Clearing cookies");
