@@ -265,16 +265,16 @@ li.store .starcomment {
 }
 .graytitle {
 	position:relative;
-	font-weight:bold;
+	/*font-weight:bold;*/
 	font-size:17px;
 	right:20px;
 	left:9px;
 	/*color:rgb(38, 153, 39);*/
 	/*color: #269927;
 	text-shadow:white 0 1px 0;*/
-    color:#eeeeee;
-	text-shadow:black 0 2px 0
-	padding:1px 0 3px 8px
+    color:#66aadd;
+	text-shadow:#fff 1px 2px 1px; 
+	padding:1px 0 3px 8px;
 }
 .header {
 	display:block;
